@@ -1,0 +1,56 @@
+<script lang="ts">
+</script>
+
+<svelte:head>
+	<title>Home</title>
+</svelte:head>
+
+<section>
+	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:px-12 lg:px-24 lg:py-24">
+		<div class="mb-12 flex w-full flex-col text-center">
+			<div
+				class="mx-auto mb-5 inline-flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-gray-50 text-blue-600"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="icon icon-tabler icon-tabler-aperture h-10 w-10"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<circle cx="12" cy="12" r="9"></circle>
+					<line x1="3.6" y1="15" x2="14.15" y2="15"></line>
+					<line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(72 12 12)"></line>
+					<line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(144 12 12)"></line>
+					<line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(216 12 12)"></line>
+					<line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(288 12 12)"></line>
+				</svg>
+			</div>
+			<h1
+				class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:max-w-7xl lg:text-6xl"
+			>
+				Long headline to turn <br class="hidden lg:block" />
+				your visitors into users
+			</h1>
+
+			<p class="mx-auto mt-8 max-w-xl text-center text-base leading-relaxed text-gray-500">
+				Free and Premium themes, UI Kit's, templates and landing pages built with Tailwind CSS, HTML
+				&amp; Next.js.
+			</p>
+
+			<a
+				class="mx-auto mt-8 text-sm font-semibold text-blue-600 hover:text-neutral-600"
+				title="read more"
+				href="/select"
+			>
+				Start now »
+			</a>
+		</div>
+	</div>
+</section>
