@@ -6,6 +6,55 @@
 	export let data: PageData;
 
 	const { form, errors, enhance } = superForm(data.form);
+
+	let isDisabled: boolean;
+
+	let excavator = $form.excavator;
+	let backhoe = $form.backhoe;
+	let dump = $form.dump;
+	let bulldozer = $form.bulldozer;
+	let roller = $form.roller;
+	let grader = $form.grader;
+
+	$: isDisabled = false;
+
+	function handleDisable() {
+		if (!excavator && !backhoe && !dump && !bulldozer && !roller && !grader) {
+			isDisabled = true;
+		} else {
+			isDisabled = false;
+		}
+	}
+
+	function handleExcavator() {
+		excavator = !excavator;
+		handleDisable();
+	}
+
+	function handleBackhoe() {
+		backhoe = !backhoe;
+		handleDisable();
+	}
+
+	function handleDump() {
+		dump = !dump;
+		handleDisable();
+	}
+
+	function handleBulldozer() {
+		bulldozer = !bulldozer;
+		handleDisable();
+	}
+
+	function handleRoller() {
+		roller = !roller;
+		handleDisable();
+	}
+
+	function handleGrader() {
+		grader = !grader;
+		handleDisable();
+	}
 </script>
 
 <svelte:head>
@@ -45,7 +94,7 @@
 					<Input
 						type="text"
 						id="company"
-						name="company	"
+						name="company"
 						placeholder="Your company name..."
 						bind:value={$form.company}
 						aria-invalid={$errors.company ? 'true' : undefined}
@@ -63,6 +112,7 @@
 						type="checkbox"
 						id="excavator"
 						name="excavator"
+						on:click={handleExcavator}
 						bind:checked={$form.excavator}
 						aria-invalid={$errors.excavator ? 'true' : undefined}>Excavator</Checkbox
 					>
@@ -70,6 +120,7 @@
 						type="checkbox"
 						id="dump"
 						name="dump"
+						on:click={handleDump}
 						bind:checked={$form.dump}
 						aria-invalid={$errors.dump ? 'true' : undefined}>Dump Truck</Checkbox
 					>
@@ -77,6 +128,7 @@
 						type="checkbox"
 						id="roller"
 						name="roller"
+						on:click={handleRoller}
 						bind:checked={$form.roller}
 						aria-invalid={$errors.roller ? 'true' : undefined}>Roller/Compactor</Checkbox
 					>
@@ -84,6 +136,7 @@
 						type="checkbox"
 						id="backhoe"
 						name="backhoe"
+						on:click={handleBackhoe}
 						bind:checked={$form.backhoe}
 						aria-invalid={$errors.backhoe ? 'true' : undefined}>Backhoe</Checkbox
 					>
@@ -91,6 +144,7 @@
 						type="checkbox"
 						id="bulldozer"
 						name="bulldozer"
+						on:click={handleBulldozer}
 						bind:checked={$form.bulldozer}
 						aria-invalid={$errors.bulldozer ? 'true' : undefined}>Bulldozer</Checkbox
 					>
@@ -98,6 +152,7 @@
 						type="checkbox"
 						id="grader"
 						name="grader"
+						on:click={handleGrader}
 						bind:checked={$form.grader}
 						aria-invalid={$errors.grader ? 'true' : undefined}>Grader</Checkbox
 					>
@@ -106,10 +161,9 @@
 
 			<button
 				type="submit"
-				class="mt-4 inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 sm:mt-6"
+				class="variant-filled-primary btn my-2 disabled:variant-filled-primary"
+				disabled={isDisabled}>Continue</button
 			>
-				Continue
-			</button>
 		</form>
 	</div>
 </section>
