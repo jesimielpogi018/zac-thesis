@@ -1,7 +1,5 @@
 <script lang="ts">
 	import {
-		Button,
-		Radio,
 		Table,
 		TableBody,
 		TableBodyCell,
@@ -9,6 +7,7 @@
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
+	import CheckboxRipple from '$lib/components/owned/CheckboxRipple.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 
@@ -24,14 +23,79 @@
 
 	const previewData: { [key: string]: TableData } = {};
 
-	let excavatorCostElement: HTMLInputElement;
-	let excavatorMileageElement: HTMLInputElement;
-	let excavatorLifespanElement: HTMLInputElement;
-	let excavatorIsUsedElement: HTMLInputElement;
-	let excavatorYearsInOperationElement: HTMLInputElement;
-	let excavatorSalvageValueElement: HTMLInputElement;
-	let excavatorDepreciationRateElement: HTMLInputElement;
-	let excavatorBtn: HTMLInputElement;
+	let excavatorCost: number;
+	let excavatorMileage: number;
+	let excavatorLifespan: number;
+	let excavatorIsUsed: boolean = false;
+	let excavatorYearsInOperation: number;
+	let excavatorSalvageValue: number;
+	let excavatorDepreciationRate: number;
+
+	let dumpCost: number;
+	let dumpMileage: number;
+	let dumpLifespan: number;
+	let dumpIsUsedYes: boolean;
+	let dumpYearsInOperation: number;
+	let dumpSalvageValue: number;
+	let dumpDepreciationRate: number;
+
+	let rollerCost: number;
+	let rollerMileage: number;
+	let rollerLifespan: number;
+	let rollerIsUsedYes: boolean;
+	let rollerYearsInOperation: number;
+	let rollerSalvageValue: number;
+	let rollerDepreciationRate: number;
+
+	let backhoeCost: number;
+	let backhoeMileage: number;
+	let backhoeLifespan: number;
+	let backhoeIsUsedYes: boolean;
+	let backhoeYearsInOperation: number;
+	let backhoeSalvageValue: number;
+	let backhoeDepreciationRate: number;
+
+	let bulldozerCost: number;
+	let bulldozerMileage: number;
+	let bulldozerLifespan: number;
+	let bulldozerIsUsedYes: boolean;
+	let bulldozerYearsInOperation: number;
+	let bulldozerSalvageValue: number;
+	let bulldozerDepreciationRate: number;
+
+	let graderCost: number;
+	let graderMileage: number;
+	let graderLifespan: number;
+	let graderIsUsedYes: boolean;
+	let graderYearsInOperation: number;
+	let graderSalvageValue: number;
+	let graderDepreciationRate: number;
+
+	class Equipment {}
+
+	// let timerID: NodeJS.Timeout | undefined;
+
+	// function throttle(cb: Function, delay: number) {
+	// 	if (timerID) return;
+
+	// 	timerID = setTimeout(() => {
+	// 		cb();
+	// 		timerID = undefined;
+	// 	}, delay);
+	// }
+
+	// function debounce(cb: Function, delay: number) {
+	// 	clearTimeout(timerID);
+
+	// 	timerID = setTimeout(() => cb(), delay);
+	// }
+
+	const inputContainer = 'flex w-48 flex-col gap-6';
+	const inputHolder = 'relative h-11 w-full min-w-[200px]';
+	const inputStyle =
+		'border-blue-gray-200 text-blue-gray-700 placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer h-full w-full border-b bg-transparent pb-1.5 pt-4 font-sans text-sm font-normal outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0';
+	const radioInput =
+		"before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border text-primary-500 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-primary-500 checked:before:bg-primary-500 hover:before:opacity-10";
 </script>
 
 <svelte:head>
@@ -53,36 +117,114 @@
 			<TableHeadCell>Years in Operation</TableHeadCell>
 			<TableHeadCell>Salvage Value</TableHeadCell>
 			<TableHeadCell>Depreciation Rate</TableHeadCell>
-			<TableHeadCell>Action</TableHeadCell>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y">
 			{#if data.equipments.includes('excavator')}
 				<TableBodyRow>
 					<TableBodyCell>Excavator</TableBodyCell>
 					<TableBodyCell>
-						<input bind:this={excavatorCostElement} class="input border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input
+									bind:value={excavatorCost}
+									placeholder="Cost of excavator"
+									class={inputStyle}
+								/>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input bind:this={excavatorMileageElement} class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input
+									bind:value={excavatorMileage}
+									placeholder="Mileage of excavator"
+									class={inputStyle}
+								/>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input bind:this={excavatorLifespanElement} class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input
+									bind:value={excavatorLifespan}
+									placeholder="Lifespan of excavator"
+									class={inputStyle}
+								/>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Radio name="example">No</Radio>
-						<Radio name="example" checked={true}>Yes</Radio>
+						<div class="flex gap-2">
+							<div class="inline-flex items-center">
+								<label
+									class="relative flex cursor-pointer items-center rounded-full p-3"
+									for="on"
+									data-ripple-dark="true"
+								>
+									<input
+										value={true}
+										bind:group={excavatorIsUsed}
+										type="radio"
+										class={radioInput}
+										id="on"
+									/>
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
+									Yes
+								</label>
+							</div>
+							<div class="inline-flex items-center">
+								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
+									<input
+										value={false}
+										bind:group={excavatorIsUsed}
+										type="radio"
+										class={radioInput}
+										id="off"
+									/>
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
+									No
+								</label>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input
+									bind:value={excavatorYearsInOperation}
+									placeholder="Operation years"
+									class={inputStyle}
+								/>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input
+									bind:value={excavatorSalvageValue}
+									placeholder="Salvage Value of excavator"
+									class={inputStyle}
+								/>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
-					</TableBodyCell>
-					<TableBodyCell>
-						<Button>Save</Button>
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input
+									bind:value={excavatorDepreciationRate}
+									placeholder="Depreciation Rate of excavator"
+									class={inputStyle}
+								/>
+							</div>
+						</div>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -91,29 +233,75 @@
 				<TableBodyRow>
 					<TableBodyCell>Dump Truck</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Radio name="example">No</Radio>
-						<Radio name="example" checked={true}>Yes</Radio>
+						<div class="flex gap-2">
+							<div class="inline-flex items-center">
+								<label
+									class="relative flex cursor-pointer items-center rounded-full p-3"
+									for="on"
+									data-ripple-dark="true"
+								>
+									<input type="radio" class={radioInput} id="on" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
+									Yes
+								</label>
+							</div>
+							<div class="inline-flex items-center">
+								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
+									<input type="radio" class={radioInput} id="off" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
+									No
+								</label>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Button>Save</Button>
+						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -122,29 +310,75 @@
 				<TableBodyRow>
 					<TableBodyCell>Roller/Compactor</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Radio name="example">No</Radio>
-						<Radio name="example" checked={true}>Yes</Radio>
+						<div class="flex gap-2">
+							<div class="inline-flex items-center">
+								<label
+									class="relative flex cursor-pointer items-center rounded-full p-3"
+									for="on"
+									data-ripple-dark="true"
+								>
+									<input type="radio" class={radioInput} id="on" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
+									Yes
+								</label>
+							</div>
+							<div class="inline-flex items-center">
+								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
+									<input type="radio" class={radioInput} id="off" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
+									No
+								</label>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Button>Save</Button>
+						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -153,29 +387,75 @@
 				<TableBodyRow>
 					<TableBodyCell>Backhoe</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Radio name="example">No</Radio>
-						<Radio name="example" checked={true}>Yes</Radio>
+						<div class="flex gap-2">
+							<div class="inline-flex items-center">
+								<label
+									class="relative flex cursor-pointer items-center rounded-full p-3"
+									for="on"
+									data-ripple-dark="true"
+								>
+									<input type="radio" class={radioInput} id="on" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
+									Yes
+								</label>
+							</div>
+							<div class="inline-flex items-center">
+								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
+									<input type="radio" class={radioInput} id="off" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
+									No
+								</label>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Button>Save</Button>
+						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -184,29 +464,75 @@
 				<TableBodyRow>
 					<TableBodyCell>Bulldozer</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Radio name="example">No</Radio>
-						<Radio name="example" checked={true}>Yes</Radio>
+						<div class="flex gap-2">
+							<div class="inline-flex items-center">
+								<label
+									class="relative flex cursor-pointer items-center rounded-full p-3"
+									for="on"
+									data-ripple-dark="true"
+								>
+									<input type="radio" class={radioInput} id="on" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
+									Yes
+								</label>
+							</div>
+							<div class="inline-flex items-center">
+								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
+									<input type="radio" class={radioInput} id="off" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
+									No
+								</label>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Button>Save</Button>
+						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -215,32 +541,180 @@
 				<TableBodyRow>
 					<TableBodyCell>Grader</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Radio name="example">No</Radio>
-						<Radio name="example" checked={true}>Yes</Radio>
+						<div class="flex gap-2">
+							<div class="inline-flex items-center">
+								<label
+									class="relative flex cursor-pointer items-center rounded-full p-3"
+									for="on"
+									data-ripple-dark="true"
+								>
+									<input type="radio" class={radioInput} id="on" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
+									Yes
+								</label>
+							</div>
+							<div class="inline-flex items-center">
+								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
+									<input type="radio" class={radioInput} id="off" />
+									<CheckboxRipple />
+								</label>
+								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
+									No
+								</label>
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<input class="border-inherit bg-inherit" />
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input placeholder="Cost of dump truck" class={inputStyle} />
+							</div>
+						</div>
 					</TableBodyCell>
 					<TableBodyCell>
-						<Button>Save</Button>
+						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
 		</TableBody>
 	</Table>
+
+	<br />
+
+	<section class="body-font overflow-hidden text-gray-600">
+		<div class="container mx-auto px-5 py-24">
+			<div class="-my-8 divide-y-2 divide-gray-100">
+				<div class="flex flex-wrap py-8 md:flex-nowrap">
+					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
+						<span class="title-font font-semibold text-gray-700">CATEGORY</span>
+						<span class="mt-1 text-sm text-gray-500">12 Jun 2019</span>
+					</div>
+					<div class="md:flex-grow">
+						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">
+							Bitters hashtag waistcoat fashion axe chia unicorn
+						</h2>
+						<p class="leading-relaxed">
+							Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave
+							ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha
+							lumbersexual pork belly polaroid hoodie portland craft beer.
+						</p>
+						<a class="mt-4 inline-flex items-center text-indigo-500"
+							>Learn More
+							<svg
+								class="ml-2 h-4 w-4"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path d="M5 12h14"></path>
+								<path d="M12 5l7 7-7 7"></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+				<div class="flex flex-wrap py-8 md:flex-nowrap">
+					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
+						<span class="title-font font-semibold text-gray-700">CATEGORY</span>
+						<span class="mt-1 text-sm text-gray-500">12 Jun 2019</span>
+					</div>
+					<div class="md:flex-grow">
+						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">
+							Meditation bushwick direct trade taxidermy shaman
+						</h2>
+						<p class="leading-relaxed">
+							Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave
+							ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha
+							lumbersexual pork belly polaroid hoodie portland craft beer.
+						</p>
+						<a class="mt-4 inline-flex items-center text-indigo-500"
+							>Learn More
+							<svg
+								class="ml-2 h-4 w-4"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path d="M5 12h14"></path>
+								<path d="M12 5l7 7-7 7"></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+				<div class="flex flex-wrap py-8 md:flex-nowrap">
+					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
+						<span class="title-font font-semibold text-gray-700">CATEGORY</span>
+						<span class="text-sm text-gray-500">12 Jun 2019</span>
+					</div>
+					<div class="md:flex-grow">
+						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">
+							Woke master cleanse drinking vinegar salvia
+						</h2>
+						<p class="leading-relaxed">
+							Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave
+							ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha
+							lumbersexual pork belly polaroid hoodie portland craft beer.
+						</p>
+						<a class="mt-4 inline-flex items-center text-indigo-500"
+							>Learn More
+							<svg
+								class="ml-2 h-4 w-4"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path d="M5 12h14"></path>
+								<path d="M12 5l7 7-7 7"></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
