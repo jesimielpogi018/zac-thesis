@@ -34,7 +34,7 @@
 	let dumpCost: number;
 	let dumpMileage: number;
 	let dumpLifespan: number;
-	let dumpIsUsedYes: boolean;
+	let dumpIsUsed: boolean = false;
 	let dumpYearsInOperation: number;
 	let dumpSalvageValue: number;
 	let dumpDepreciationRate: number;
@@ -42,7 +42,7 @@
 	let rollerCost: number;
 	let rollerMileage: number;
 	let rollerLifespan: number;
-	let rollerIsUsedYes: boolean;
+	let rollerIsUsed: boolean = false;
 	let rollerYearsInOperation: number;
 	let rollerSalvageValue: number;
 	let rollerDepreciationRate: number;
@@ -50,7 +50,7 @@
 	let backhoeCost: number;
 	let backhoeMileage: number;
 	let backhoeLifespan: number;
-	let backhoeIsUsedYes: boolean;
+	let backhoeIsUsed: boolean = false;
 	let backhoeYearsInOperation: number;
 	let backhoeSalvageValue: number;
 	let backhoeDepreciationRate: number;
@@ -125,33 +125,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input
-									bind:value={excavatorCost}
-									placeholder="Cost of excavator"
-									class={inputStyle}
-								/>
+								<input bind:value={excavatorCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input
-									bind:value={excavatorMileage}
-									placeholder="Mileage of excavator"
-									class={inputStyle}
-								/>
+								<input bind:value={excavatorMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input
-									bind:value={excavatorLifespan}
-									placeholder="Lifespan of excavator"
-									class={inputStyle}
-								/>
+								<input bind:value={excavatorLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
@@ -209,7 +197,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={excavatorSalvageValue}
-									placeholder="Salvage Value of excavator"
+									placeholder="Salvage Value"
 									class={inputStyle}
 								/>
 							</div>
@@ -220,7 +208,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={excavatorDepreciationRate}
-									placeholder="Depreciation Rate of excavator"
+									placeholder="Depreciation Rate"
 									class={inputStyle}
 								/>
 							</div>
@@ -235,21 +223,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={dumpCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={dumpMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={dumpLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
@@ -261,7 +249,13 @@
 									for="on"
 									data-ripple-dark="true"
 								>
-									<input type="radio" class={radioInput} id="on" />
+									<input
+										value={true}
+										bind:group={dumpIsUsed}
+										type="radio"
+										class={radioInput}
+										id="on"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
@@ -270,7 +264,13 @@
 							</div>
 							<div class="inline-flex items-center">
 								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input type="radio" class={radioInput} id="off" />
+									<input
+										value={false}
+										bind:group={dumpIsUsed}
+										type="radio"
+										class={radioInput}
+										id="off"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
@@ -282,26 +282,35 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={dumpYearsInOperation}
+									placeholder="Operation years"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={dumpSalvageValue}
+									placeholder="Salvage Value"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={dumpDepreciationRate}
+									placeholder="Depreciation Rate"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
-					</TableBodyCell>
-					<TableBodyCell>
-						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -312,21 +321,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={rollerCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={rollerMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={rollerLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
@@ -338,7 +347,13 @@
 									for="on"
 									data-ripple-dark="true"
 								>
-									<input type="radio" class={radioInput} id="on" />
+									<input
+										value={true}
+										bind:group={rollerIsUsed}
+										type="radio"
+										class={radioInput}
+										id="on"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
@@ -347,7 +362,13 @@
 							</div>
 							<div class="inline-flex items-center">
 								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input type="radio" class={radioInput} id="off" />
+									<input
+										value={false}
+										bind:group={rollerIsUsed}
+										type="radio"
+										class={radioInput}
+										id="off"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
@@ -359,26 +380,35 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={rollerYearsInOperation}
+									placeholder="Operation years"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={rollerSalvageValue}
+									placeholder="Salvage Value"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={rollerDepreciationRate}
+									placeholder="Depreciation Rate"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
-					</TableBodyCell>
-					<TableBodyCell>
-						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -389,21 +419,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={backhoeCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={backhoeMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input bind:value={backhoeLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
@@ -415,7 +445,13 @@
 									for="on"
 									data-ripple-dark="true"
 								>
-									<input type="radio" class={radioInput} id="on" />
+									<input
+										value={true}
+										bind:group={backhoeIsUsed}
+										type="radio"
+										class={radioInput}
+										id="on"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
@@ -424,7 +460,13 @@
 							</div>
 							<div class="inline-flex items-center">
 								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input type="radio" class={radioInput} id="off" />
+									<input
+										value={false}
+										bind:group={backhoeIsUsed}
+										type="radio"
+										class={radioInput}
+										id="off"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
@@ -436,21 +478,33 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={backhoeYearsInOperation}
+									placeholder="Operation years"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={backhoeSalvageValue}
+									placeholder="Salvage Value"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input
+									bind:value={backhoeDepreciationRate}
+									placeholder="Depreciation Rate"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
@@ -466,21 +520,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
@@ -513,21 +567,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
@@ -543,21 +597,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
@@ -590,21 +644,21 @@
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell>
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost of dump truck" class={inputStyle} />
+								<input placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
