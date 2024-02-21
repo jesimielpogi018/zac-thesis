@@ -5,12 +5,11 @@
 	import '../app.pcss';
 
 	import { Navbar, NavBrand } from 'flowbite-svelte';
-	import Excavator from '$lib/icons/excavator.svelte';
 </script>
 
 <AppShell>
 	<svelte:fragment slot="header">
-		<Navbar>
+		<Navbar class="dark:bg-[#181818]">
 			<NavBrand href="/" class="">
 				<div class="flex flex-row items-center justify-center gap-2">
 					<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
