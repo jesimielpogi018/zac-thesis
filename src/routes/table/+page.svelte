@@ -5,7 +5,8 @@
 		TableBodyCell,
 		TableBodyRow,
 		TableHead,
-		TableHeadCell
+		TableHeadCell,
+		Hr
 	} from 'flowbite-svelte';
 	import CheckboxRipple from '$lib/components/owned/CheckboxRipple.svelte';
 	import type { PageData } from './$types';
@@ -58,7 +59,7 @@
 	let bulldozerCost: number;
 	let bulldozerMileage: number;
 	let bulldozerLifespan: number;
-	let bulldozerIsUsedYes: boolean;
+	let bulldozerIsUsed: boolean = false;
 	let bulldozerYearsInOperation: number;
 	let bulldozerSalvageValue: number;
 	let bulldozerDepreciationRate: number;
@@ -66,7 +67,7 @@
 	let graderCost: number;
 	let graderMileage: number;
 	let graderLifespan: number;
-	let graderIsUsedYes: boolean;
+	let graderIsUsed: boolean = false;
 	let graderYearsInOperation: number;
 	let graderSalvageValue: number;
 	let graderDepreciationRate: number;
@@ -93,7 +94,7 @@
 	const inputContainer = 'flex w-48 flex-col gap-6';
 	const inputHolder = 'relative h-11 w-full min-w-[200px]';
 	const inputStyle =
-		'border-blue-gray-200 text-blue-gray-700 placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer h-full w-full border-b bg-transparent pb-1.5 pt-4 font-sans text-sm font-normal outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0';
+		'form-input border-0 border-b-2 border-neutral-500 bg-inherit text-sm focus:border-black focus:ring-0 dark:placeholder:text-neutral-300 dark:border-neutral-300 dark:focus:border-white';
 	const radioInput =
 		"before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border text-primary-500 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-primary-500 checked:before:bg-primary-500 hover:before:opacity-10";
 </script>
@@ -103,47 +104,53 @@
 </svelte:head>
 
 <div class="mx-auto flex max-w-7xl flex-col items-center px-4 py-8 lg:py-16">
-	<h2 class="mb-4 text-xl font-bold text-neutral-900">Please complete the form.</h2>
-	<h2 class="mb-4 text-lg font-bold text-neutral-600">Username: {data.username}</h2>
-	<h2 class="mb-4 text-lg font-bold text-neutral-600">Company: {data.company}</h2>
+	<h2 class="mb-4 w-full pl-4 text-xl font-bold text-neutral-900">Please complete the form.</h2>
+	<h2 class="mb-4 w-full pl-4 text-lg font-bold text-neutral-600">Username: {data.username}</h2>
+	<h2 class="mb-4 w-full pl-4 text-lg font-bold text-neutral-600">Company: {data.company}</h2>
 
-	<Table divClass="relative overflow-x-auto w-full">
+	<Table divClass="rounded-sm relative overflow-x-auto w-full">
 		<TableHead>
-			<TableHeadCell>Equipment</TableHeadCell>
-			<TableHeadCell>Cost of Equipment</TableHeadCell>
-			<TableHeadCell>Mileage</TableHeadCell>
-			<TableHeadCell>Lifespan</TableHeadCell>
-			<TableHeadCell>Is used?</TableHeadCell>
-			<TableHeadCell>Years in Operation</TableHeadCell>
-			<TableHeadCell>Salvage Value</TableHeadCell>
-			<TableHeadCell>Depreciation Rate</TableHeadCell>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Equipment</TableHeadCell>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100"
+				>Cost of Equipment</TableHeadCell
+			>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Mileage</TableHeadCell>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Lifespan</TableHeadCell>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Is used?</TableHeadCell>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100"
+				>Years in Operation</TableHeadCell
+			>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Salvage Value</TableHeadCell>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100"
+				>Depreciation Rate</TableHeadCell
+			>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y">
 			{#if data.equipments.includes('excavator')}
 				<TableBodyRow>
-					<TableBodyCell>Excavator</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">Excavator</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={excavatorCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={excavatorMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={excavatorLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class="flex gap-2">
 							<div class="inline-flex items-center">
 								<label
@@ -181,7 +188,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -192,7 +199,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -203,7 +210,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -219,29 +226,29 @@
 
 			{#if data.equipments.includes('dump')}
 				<TableBodyRow>
-					<TableBodyCell>Dump Truck</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">Dump Truck</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={dumpCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={dumpMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={dumpLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class="flex gap-2">
 							<div class="inline-flex items-center">
 								<label
@@ -279,7 +286,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -290,7 +297,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -301,7 +308,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -317,29 +324,29 @@
 
 			{#if data.equipments.includes('roller')}
 				<TableBodyRow>
-					<TableBodyCell>Roller/Compactor</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">Roller/Compactor</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={rollerCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={rollerMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={rollerLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class="flex gap-2">
 							<div class="inline-flex items-center">
 								<label
@@ -377,7 +384,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -388,7 +395,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -399,7 +406,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -415,29 +422,29 @@
 
 			{#if data.equipments.includes('backhoe')}
 				<TableBodyRow>
-					<TableBodyCell>Backhoe</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">Backhoe</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={backhoeCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={backhoeMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input bind:value={backhoeLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class="flex gap-2">
 							<div class="inline-flex items-center">
 								<label
@@ -475,7 +482,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -486,7 +493,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -497,7 +504,7 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
@@ -508,37 +515,34 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
-						<button type="button" class="variant-filled-primary btn">Save</button>
-					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
 
 			{#if data.equipments.includes('bulldozer')}
 				<TableBodyRow>
-					<TableBodyCell>Bulldozer</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">Bulldozer</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input bind:value={bulldozerCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input bind:value={bulldozerMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input bind:value={bulldozerLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class="flex gap-2">
 							<div class="inline-flex items-center">
 								<label
@@ -546,7 +550,13 @@
 									for="on"
 									data-ripple-dark="true"
 								>
-									<input type="radio" class={radioInput} id="on" />
+									<input
+										value={true}
+										bind:group={bulldozerIsUsed}
+										type="radio"
+										class={radioInput}
+										id="on"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
@@ -555,7 +565,13 @@
 							</div>
 							<div class="inline-flex items-center">
 								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input type="radio" class={radioInput} id="off" />
+									<input
+										value={false}
+										bind:group={bulldozerIsUsed}
+										type="radio"
+										class={radioInput}
+										id="off"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
@@ -564,58 +580,67 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={bulldozerYearsInOperation}
+									placeholder="Operation years"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={bulldozerSalvageValue}
+									placeholder="Salvage Value"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={bulldozerDepreciationRate}
+									placeholder="Depreciation Rate"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
-					</TableBodyCell>
-					<TableBodyCell>
-						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
 
 			{#if data.equipments.includes('grader')}
 				<TableBodyRow>
-					<TableBodyCell>Grader</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">Grader</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input type="text" bind:value={graderCost} placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input bind:value={graderMileage} placeholder="Mileage" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input bind:value={graderLifespan} placeholder="Lifespan" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class="flex gap-2">
 							<div class="inline-flex items-center">
 								<label
@@ -623,7 +648,13 @@
 									for="on"
 									data-ripple-dark="true"
 								>
-									<input type="radio" class={radioInput} id="on" />
+									<input
+										value={true}
+										bind:group={graderIsUsed}
+										type="radio"
+										class={radioInput}
+										id="on"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
@@ -632,7 +663,13 @@
 							</div>
 							<div class="inline-flex items-center">
 								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input type="radio" class={radioInput} id="off" />
+									<input
+										value={false}
+										bind:group={graderIsUsed}
+										type="radio"
+										class={radioInput}
+										id="off"
+									/>
 									<CheckboxRipple />
 								</label>
 								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
@@ -641,29 +678,38 @@
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={graderYearsInOperation}
+									placeholder="Operation years"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={graderSalvageValue}
+									placeholder="Salvage Value"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={graderDepreciationRate}
+									placeholder="Depreciation Rate"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
-					</TableBodyCell>
-					<TableBodyCell>
-						<button type="button" class="variant-filled-primary btn">Save</button>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/if}
@@ -677,95 +723,54 @@
 			<div class="-my-8 divide-y-2 divide-gray-100">
 				<div class="flex flex-wrap py-8 md:flex-nowrap">
 					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
-						<span class="title-font font-semibold text-gray-700">CATEGORY</span>
-						<span class="mt-1 text-sm text-gray-500">12 Jun 2019</span>
+						<span class="title-font font-semibold text-gray-700">Excavator</span>
 					</div>
 					<div class="md:flex-grow">
-						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">
-							Bitters hashtag waistcoat fashion axe chia unicorn
-						</h2>
-						<p class="leading-relaxed">
-							Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave
-							ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha
-							lumbersexual pork belly polaroid hoodie portland craft beer.
-						</p>
-						<a class="mt-4 inline-flex items-center text-indigo-500"
-							>Learn More
-							<svg
-								class="ml-2 h-4 w-4"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path d="M5 12h14"></path>
-								<path d="M12 5l7 7-7 7"></path>
-							</svg>
-						</a>
-					</div>
-				</div>
-				<div class="flex flex-wrap py-8 md:flex-nowrap">
-					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
-						<span class="title-font font-semibold text-gray-700">CATEGORY</span>
-						<span class="mt-1 text-sm text-gray-500">12 Jun 2019</span>
-					</div>
-					<div class="md:flex-grow">
-						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">
-							Meditation bushwick direct trade taxidermy shaman
-						</h2>
-						<p class="leading-relaxed">
-							Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave
-							ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha
-							lumbersexual pork belly polaroid hoodie portland craft beer.
-						</p>
-						<a class="mt-4 inline-flex items-center text-indigo-500"
-							>Learn More
-							<svg
-								class="ml-2 h-4 w-4"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path d="M5 12h14"></path>
-								<path d="M12 5l7 7-7 7"></path>
-							</svg>
-						</a>
-					</div>
-				</div>
-				<div class="flex flex-wrap py-8 md:flex-nowrap">
-					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
-						<span class="title-font font-semibold text-gray-700">CATEGORY</span>
-						<span class="text-sm text-gray-500">12 Jun 2019</span>
-					</div>
-					<div class="md:flex-grow">
-						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">
-							Woke master cleanse drinking vinegar salvia
-						</h2>
-						<p class="leading-relaxed">
-							Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave
-							ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha
-							lumbersexual pork belly polaroid hoodie portland craft beer.
-						</p>
-						<a class="mt-4 inline-flex items-center text-indigo-500"
-							>Learn More
-							<svg
-								class="ml-2 h-4 w-4"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path d="M5 12h14"></path>
-								<path d="M12 5l7 7-7 7"></path>
-							</svg>
-						</a>
+						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">Excavator's Data</h2>
+						<div class="grid grid-cols-1 gap-2 divide-y leading-relaxed dark:divide-neutral-100">
+							<div class="grid w-full grid-cols-2 gap-2">
+								<p class="dark:text-neutral-100">
+									Cost:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								</p>
+								<p class="dark:text-neutral-100">{excavatorCost ?? 'No input yet!'}</p>
+							</div>
+							<div class="grid w-full grid-cols-2 gap-2">
+								<p class="dark:text-neutral-100">
+									Mileage:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								</p>
+								<p class="dark:text-neutral-100">{excavatorCost}</p>
+							</div>
+							<div class="grid w-full grid-cols-2 gap-2">
+								<p class="dark:text-neutral-100">
+									Lifespan:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								</p>
+								<p class="dark:text-neutral-100">{excavatorCost}</p>
+							</div>
+							<div class="grid w-full grid-cols-2 gap-2">
+								<p class="dark:text-neutral-100">
+									Is used?:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								</p>
+								<p class="dark:text-neutral-100">{excavatorCost}</p>
+							</div>
+							<div class="grid w-full grid-cols-2 gap-2">
+								<p class="dark:text-neutral-100">
+									Operation years:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								</p>
+								<p class="dark:text-neutral-100">{excavatorCost}</p>
+							</div>
+							<div class="grid w-full grid-cols-2 gap-2">
+								<p class="dark:text-neutral-100">
+									Salvage Value:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								</p>
+								<p class="dark:text-neutral-100">{excavatorCost}</p>
+							</div>
+							<div class="grid w-full grid-cols-2 gap-2">
+								<p class="dark:text-neutral-100">
+									Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								</p>
+								<p class="dark:text-neutral-100">{excavatorCost}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

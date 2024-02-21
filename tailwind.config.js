@@ -1,12 +1,14 @@
 import { join } from 'path';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import flowbite from 'flowbite/plugin';
+import forms from '@tailwindcss/forms';
 import { skeleton } from '@skeletonlabs/tw-plugin';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
 	plugins: [
+		forms,
 		flowbite,
 		skeleton({
 			themes: { preset: ['gold-nouveau'] }
