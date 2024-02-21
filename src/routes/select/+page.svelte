@@ -17,7 +17,7 @@
 	<title>Selection of Equipments</title>
 </svelte:head>
 
-<section class="">
+<section>
 	<div class="mx-auto max-w-2xl px-4 py-8 lg:py-16">
 		<h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
 			Welcome! Please fill up the form.
