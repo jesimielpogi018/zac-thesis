@@ -1,6 +1,5 @@
 import type { PageServerLoad } from './$types';
-
-const availableEquipments = ['excavator', 'dump', 'roller', 'bulldozer', 'grader', 'backhoe'];
+import { equipments as availableEquipments } from '$lib/equipments';
 
 export const load: PageServerLoad = async ({ url }) => {
 	const equipments: string[] = [];

@@ -5,8 +5,7 @@
 		TableBodyCell,
 		TableBodyRow,
 		TableHead,
-		TableHeadCell,
-		Hr
+		TableHeadCell
 	} from 'flowbite-svelte';
 	import CheckboxRipple from '$lib/components/owned/CheckboxRipple.svelte';
 	import type { PageData } from './$types';
@@ -22,111 +21,63 @@
 		depreciationRate: number | undefined;
 	}
 
-	let excavatorCost: number | undefined = undefined;
-	let excavatorMileage: number | undefined = undefined;
-	let excavatorLifespan: number | undefined = undefined;
-	let excavatorIsUsed: boolean = false;
-	let excavatorYearsInOperation: number | undefined = undefined;
-	let excavatorSalvageValue: number | undefined = undefined;
-	let excavatorDepreciationRate: number | undefined = undefined;
-
-	let dumpCost: number | undefined = undefined;
-	let dumpMileage: number | undefined = undefined;
-	let dumpLifespan: number | undefined = undefined;
-	let dumpIsUsed: boolean = false;
-	let dumpYearsInOperation: number | undefined = undefined;
-	let dumpSalvageValue: number | undefined = undefined;
-	let dumpDepreciationRate: number | undefined = undefined;
-
-	let rollerCost: number | undefined = undefined;
-	let rollerMileage: number | undefined = undefined;
-	let rollerLifespan: number | undefined = undefined;
-	let rollerIsUsed: boolean = false;
-	let rollerYearsInOperation: number | undefined = undefined;
-	let rollerSalvageValue: number | undefined = undefined;
-	let rollerDepreciationRate: number | undefined = undefined;
-
-	let backhoeCost: number | undefined = undefined;
-	let backhoeMileage: number | undefined = undefined;
-	let backhoeLifespan: number | undefined = undefined;
-	let backhoeIsUsed: boolean = false;
-	let backhoeYearsInOperation: number | undefined = undefined;
-	let backhoeSalvageValue: number | undefined = undefined;
-	let backhoeDepreciationRate: number | undefined = undefined;
-
-	let bulldozerCost: number | undefined = undefined;
-	let bulldozerMileage: number | undefined = undefined;
-	let bulldozerLifespan: number | undefined = undefined;
-	let bulldozerIsUsed: boolean = false;
-	let bulldozerYearsInOperation: number | undefined = undefined;
-	let bulldozerSalvageValue: number | undefined = undefined;
-	let bulldozerDepreciationRate: number | undefined = undefined;
-
-	let graderCost: number | undefined = undefined;
-	let graderMileage: number | undefined = undefined;
-	let graderLifespan: number | undefined = undefined;
-	let graderIsUsed: boolean = false;
-	let graderYearsInOperation: number | undefined = undefined;
-	let graderSalvageValue: number | undefined = undefined;
-	let graderDepreciationRate: number | undefined = undefined;
-
 	let previewData: { [key: string]: TableData } = {};
 
 	$: {
 		previewData = {
 			excavator: {
-				cost: excavatorCost,
-				mileage: excavatorMileage,
-				lifespan: excavatorLifespan,
-				isUsed: excavatorIsUsed,
-				yearsInOperation: excavatorYearsInOperation,
-				salvageValue: excavatorSalvageValue,
-				depreciationRate: excavatorDepreciationRate
+				cost: undefined,
+				mileage: undefined,
+				lifespan: undefined,
+				isUsed: false,
+				yearsInOperation: undefined,
+				salvageValue: undefined,
+				depreciationRate: undefined
 			},
 			dump: {
-				cost: dumpCost,
-				mileage: dumpMileage,
-				lifespan: dumpLifespan,
-				isUsed: dumpIsUsed,
-				yearsInOperation: dumpYearsInOperation,
-				salvageValue: dumpSalvageValue,
-				depreciationRate: dumpDepreciationRate
+				cost: undefined,
+				mileage: undefined,
+				lifespan: undefined,
+				isUsed: false,
+				yearsInOperation: undefined,
+				salvageValue: undefined,
+				depreciationRate: undefined
 			},
 			roller: {
-				cost: rollerCost,
-				mileage: rollerMileage,
-				lifespan: rollerLifespan,
-				isUsed: rollerIsUsed,
-				yearsInOperation: rollerYearsInOperation,
-				salvageValue: rollerSalvageValue,
-				depreciationRate: rollerDepreciationRate
+				cost: undefined,
+				mileage: undefined,
+				lifespan: undefined,
+				isUsed: false,
+				yearsInOperation: undefined,
+				salvageValue: undefined,
+				depreciationRate: undefined
 			},
 			backhoe: {
-				cost: backhoeCost,
-				mileage: backhoeMileage,
-				lifespan: backhoeLifespan,
-				isUsed: backhoeIsUsed,
-				yearsInOperation: backhoeYearsInOperation,
-				salvageValue: backhoeSalvageValue,
-				depreciationRate: backhoeDepreciationRate
+				cost: undefined,
+				mileage: undefined,
+				lifespan: undefined,
+				isUsed: false,
+				yearsInOperation: undefined,
+				salvageValue: undefined,
+				depreciationRate: undefined
 			},
 			bulldozer: {
-				cost: bulldozerCost,
-				mileage: bulldozerMileage,
-				lifespan: bulldozerLifespan,
-				isUsed: bulldozerIsUsed,
-				yearsInOperation: bulldozerYearsInOperation,
-				salvageValue: bulldozerSalvageValue,
-				depreciationRate: bulldozerDepreciationRate
+				cost: undefined,
+				mileage: undefined,
+				lifespan: undefined,
+				isUsed: false,
+				yearsInOperation: undefined,
+				salvageValue: undefined,
+				depreciationRate: undefined
 			},
 			grader: {
-				cost: graderCost,
-				mileage: graderMileage,
-				lifespan: graderLifespan,
-				isUsed: graderIsUsed,
-				yearsInOperation: graderYearsInOperation,
-				salvageValue: graderSalvageValue,
-				depreciationRate: graderDepreciationRate
+				cost: undefined,
+				mileage: undefined,
+				lifespan: undefined,
+				isUsed: false,
+				yearsInOperation: undefined,
+				salvageValue: undefined,
+				depreciationRate: undefined
 			}
 		};
 	}
@@ -172,14 +123,14 @@
 			>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y">
-			{#if data.equipments.includes('excavator')}
+			{#each data.equipments as equipment}
 				<TableBodyRow>
-					<TableBodyCell class="dark:bg-[#383838]">Excavator</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">{equipment.toLocaleUpperCase()}</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
-									bind:value={excavatorCost}
+									bind:value={previewData[equipment].cost}
 									type="number"
 									placeholder="Cost"
 									class={inputStyle}
@@ -191,7 +142,7 @@
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
-									bind:value={excavatorMileage}
+									bind:value={previewData[equipment].mileage}
 									type="number"
 									placeholder="Mileage"
 									class={inputStyle}
@@ -203,7 +154,7 @@
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
-									bind:value={excavatorLifespan}
+									bind:value={previewData[equipment].lifespan}
 									type="number"
 									placeholder="Lifespan"
 									class={inputStyle}
@@ -221,7 +172,7 @@
 								>
 									<input
 										value={true}
-										bind:group={excavatorIsUsed}
+										bind:group={previewData[equipment].isUsed}
 										type="radio"
 										class={radioInput}
 										id="on"
@@ -236,7 +187,7 @@
 								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
 									<input
 										value={false}
-										bind:group={excavatorIsUsed}
+										bind:group={previewData[equipment].isUsed}
 										type="radio"
 										class={radioInput}
 										id="off"
@@ -253,7 +204,7 @@
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
-									bind:value={excavatorYearsInOperation}
+									bind:value={previewData[equipment].yearsInOperation}
 									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
@@ -265,7 +216,7 @@
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
-									bind:value={excavatorSalvageValue}
+									bind:value={previewData[equipment].salvageValue}
 									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
@@ -277,7 +228,7 @@
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
-									bind:value={excavatorDepreciationRate}
+									bind:value={previewData[equipment].depreciationRate}
 									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
@@ -286,582 +237,7 @@
 						</div>
 					</TableBodyCell>
 				</TableBodyRow>
-			{/if}
-
-			{#if data.equipments.includes('dump')}
-				<TableBodyRow>
-					<TableBodyCell class="dark:bg-[#383838]">Dump Truck</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input bind:value={dumpCost} type="number" placeholder="Cost" class={inputStyle} />
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={dumpMileage}
-									type="number"
-									placeholder="Mileage"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={dumpLifespan}
-									type="number"
-									placeholder="Lifespan"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class="flex gap-2">
-							<div class="inline-flex items-center">
-								<label
-									class="relative flex cursor-pointer items-center rounded-full p-3"
-									for="on"
-									data-ripple-dark="true"
-								>
-									<input
-										value={true}
-										bind:group={dumpIsUsed}
-										type="radio"
-										class={radioInput}
-										id="on"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
-									Yes
-								</label>
-							</div>
-							<div class="inline-flex items-center">
-								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input
-										value={false}
-										bind:group={dumpIsUsed}
-										type="radio"
-										class={radioInput}
-										id="off"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
-									No
-								</label>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={dumpYearsInOperation}
-									type="number"
-									placeholder="Operation years"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={dumpSalvageValue}
-									type="number"
-									placeholder="Salvage Value"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={dumpDepreciationRate}
-									type="number"
-									placeholder="Depreciation Rate"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-				</TableBodyRow>
-			{/if}
-
-			{#if data.equipments.includes('roller')}
-				<TableBodyRow>
-					<TableBodyCell class="dark:bg-[#383838]">Roller/Compactor</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={rollerCost}
-									type="number"
-									placeholder="Cost"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={rollerMileage}
-									type="number"
-									placeholder="Mileage"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={rollerLifespan}
-									type="number"
-									placeholder="Lifespan"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class="flex gap-2">
-							<div class="inline-flex items-center">
-								<label
-									class="relative flex cursor-pointer items-center rounded-full p-3"
-									for="on"
-									data-ripple-dark="true"
-								>
-									<input
-										value={true}
-										bind:group={rollerIsUsed}
-										type="radio"
-										class={radioInput}
-										id="on"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
-									Yes
-								</label>
-							</div>
-							<div class="inline-flex items-center">
-								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input
-										value={false}
-										bind:group={rollerIsUsed}
-										type="radio"
-										class={radioInput}
-										id="off"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
-									No
-								</label>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={rollerYearsInOperation}
-									type="number"
-									placeholder="Operation years"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={rollerSalvageValue}
-									type="number"
-									placeholder="Salvage Value"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={rollerDepreciationRate}
-									type="number"
-									placeholder="Depreciation Rate"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-				</TableBodyRow>
-			{/if}
-
-			{#if data.equipments.includes('backhoe')}
-				<TableBodyRow>
-					<TableBodyCell class="dark:bg-[#383838]">Backhoe</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={backhoeCost}
-									type="number"
-									placeholder="Cost"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={backhoeMileage}
-									type="number"
-									placeholder="Mileage"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={backhoeLifespan}
-									type="number"
-									placeholder="Lifespan"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class="flex gap-2">
-							<div class="inline-flex items-center">
-								<label
-									class="relative flex cursor-pointer items-center rounded-full p-3"
-									for="on"
-									data-ripple-dark="true"
-								>
-									<input
-										value={true}
-										bind:group={backhoeIsUsed}
-										type="radio"
-										class={radioInput}
-										id="on"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
-									Yes
-								</label>
-							</div>
-							<div class="inline-flex items-center">
-								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input
-										value={false}
-										bind:group={backhoeIsUsed}
-										type="radio"
-										class={radioInput}
-										id="off"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
-									No
-								</label>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={backhoeYearsInOperation}
-									type="number"
-									placeholder="Operation years"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={backhoeSalvageValue}
-									type="number"
-									placeholder="Salvage Value"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={backhoeDepreciationRate}
-									type="number"
-									placeholder="Depreciation Rate"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-				</TableBodyRow>
-			{/if}
-
-			{#if data.equipments.includes('bulldozer')}
-				<TableBodyRow>
-					<TableBodyCell class="dark:bg-[#383838]">Bulldozer</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={bulldozerCost}
-									type="number"
-									placeholder="Cost"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={bulldozerMileage}
-									type="number"
-									placeholder="Mileage"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={bulldozerLifespan}
-									type="number"
-									placeholder="Lifespan"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class="flex gap-2">
-							<div class="inline-flex items-center">
-								<label
-									class="relative flex cursor-pointer items-center rounded-full p-3"
-									for="on"
-									data-ripple-dark="true"
-								>
-									<input
-										value={true}
-										bind:group={bulldozerIsUsed}
-										type="radio"
-										class={radioInput}
-										id="on"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
-									Yes
-								</label>
-							</div>
-							<div class="inline-flex items-center">
-								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input
-										value={false}
-										bind:group={bulldozerIsUsed}
-										type="radio"
-										class={radioInput}
-										id="off"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
-									No
-								</label>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={bulldozerYearsInOperation}
-									type="number"
-									placeholder="Operation years"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={bulldozerSalvageValue}
-									type="number"
-									placeholder="Salvage Value"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={bulldozerDepreciationRate}
-									type="number"
-									placeholder="Depreciation Rate"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-				</TableBodyRow>
-			{/if}
-
-			{#if data.equipments.includes('grader')}
-				<TableBodyRow>
-					<TableBodyCell class="dark:bg-[#383838]">Grader</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={graderCost}
-									type="number"
-									placeholder="Cost"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={graderMileage}
-									type="number"
-									placeholder="Mileage"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={graderLifespan}
-									type="number"
-									placeholder="Lifespan"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class="flex gap-2">
-							<div class="inline-flex items-center">
-								<label
-									class="relative flex cursor-pointer items-center rounded-full p-3"
-									for="on"
-									data-ripple-dark="true"
-								>
-									<input
-										value={true}
-										bind:group={graderIsUsed}
-										type="radio"
-										class={radioInput}
-										id="on"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="on">
-									Yes
-								</label>
-							</div>
-							<div class="inline-flex items-center">
-								<label class="relative flex cursor-pointer items-center rounded-full p-3" for="off">
-									<input
-										value={false}
-										bind:group={graderIsUsed}
-										type="radio"
-										class={radioInput}
-										id="off"
-									/>
-									<CheckboxRipple />
-								</label>
-								<label class="mt-px cursor-pointer select-none font-light text-gray-700" for="off">
-									No
-								</label>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={graderYearsInOperation}
-									type="number"
-									placeholder="Operation years"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={graderSalvageValue}
-									type="number"
-									placeholder="Salvage Value"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="dark:bg-[#383838]">
-						<div class={inputContainer}>
-							<div class={inputHolder}>
-								<input
-									bind:value={graderDepreciationRate}
-									type="number"
-									placeholder="Depreciation Rate"
-									class={inputStyle}
-								/>
-							</div>
-						</div>
-					</TableBodyCell>
-				</TableBodyRow>
-			{/if}
+			{/each}
 		</TableBody>
 	</Table>
 
@@ -887,7 +263,7 @@
 									Cost:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{previewData[equipment].cost ?? 'No input yet!'}
+									{previewData[equipment].cost ?? 'No input or invalid!'}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -895,7 +271,7 @@
 									Mileage:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{previewData[equipment].mileage ?? 'No Input yet!'}
+									{previewData[equipment].mileage ?? 'No Input or invalid!'}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -903,7 +279,7 @@
 									Lifespan:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{previewData[equipment].lifespan ?? 'No Input yet!'}
+									{previewData[equipment].lifespan ?? 'No Input or invalid!'}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -917,7 +293,7 @@
 									Operation years:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{previewData[equipment].yearsInOperation ?? 'No input yet!'}
+									{previewData[equipment].yearsInOperation ?? 'No input or invalid!'}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -925,7 +301,7 @@
 									Salvage Value:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{previewData[equipment].salvageValue ?? 'No input yet!'}
+									{previewData[equipment].salvageValue ?? 'No input or invalid!'}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -933,7 +309,7 @@
 									Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{previewData[equipment].depreciationRate ?? 'No input yet!'}
+									{previewData[equipment].depreciationRate ?? 'No input or invalid!'}
 								</p>
 							</div>
 						</div>
