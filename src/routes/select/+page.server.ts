@@ -1,4 +1,4 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -21,6 +21,17 @@ export const actions = {
 			return fail(400, { form });
 		}
 
-		return { form };
+		const arr: string[][] = [];
+
+		arr.push(['username', form.data.username]);
+		arr.push(['company', form.data.company]);
+
+		for (const i in form.data.equipments) {
+			arr.push([form.data.equipments[i], 'true']);
+		}
+
+		const url = new URLSearchParams(arr).toString();
+
+		redirect(302, '/table?' + url);
 	}
 } satisfies Actions;
