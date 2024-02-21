@@ -9,6 +9,7 @@
 	} from 'flowbite-svelte';
 	import CheckboxRipple from '$lib/components/owned/CheckboxRipple.svelte';
 	import type { PageData } from './$types';
+
 	export let data: PageData;
 
 	interface TableData {
@@ -23,62 +24,15 @@
 
 	let previewData: { [key: string]: TableData } = {};
 
-	$: {
-		previewData = {
-			excavator: {
-				cost: undefined,
-				mileage: undefined,
-				lifespan: undefined,
-				isUsed: false,
-				yearsInOperation: undefined,
-				salvageValue: undefined,
-				depreciationRate: undefined
-			},
-			dump: {
-				cost: undefined,
-				mileage: undefined,
-				lifespan: undefined,
-				isUsed: false,
-				yearsInOperation: undefined,
-				salvageValue: undefined,
-				depreciationRate: undefined
-			},
-			roller: {
-				cost: undefined,
-				mileage: undefined,
-				lifespan: undefined,
-				isUsed: false,
-				yearsInOperation: undefined,
-				salvageValue: undefined,
-				depreciationRate: undefined
-			},
-			backhoe: {
-				cost: undefined,
-				mileage: undefined,
-				lifespan: undefined,
-				isUsed: false,
-				yearsInOperation: undefined,
-				salvageValue: undefined,
-				depreciationRate: undefined
-			},
-			bulldozer: {
-				cost: undefined,
-				mileage: undefined,
-				lifespan: undefined,
-				isUsed: false,
-				yearsInOperation: undefined,
-				salvageValue: undefined,
-				depreciationRate: undefined
-			},
-			grader: {
-				cost: undefined,
-				mileage: undefined,
-				lifespan: undefined,
-				isUsed: false,
-				yearsInOperation: undefined,
-				salvageValue: undefined,
-				depreciationRate: undefined
-			}
+	for (const i in data.equipments) {
+		previewData[data.equipments[i]] = {
+			cost: undefined,
+			mileage: undefined,
+			lifespan: undefined,
+			isUsed: false,
+			yearsInOperation: undefined,
+			salvageValue: undefined,
+			depreciationRate: undefined
 		};
 	}
 
@@ -242,82 +196,84 @@
 	</Table>
 
 	<br />
-</div>
-<div class="container mx-auto px-5 py-24">
-	<section class="body-font overflow-hidden text-gray-600">
-		{#each data.equipments as equipment}
-			<div class="-my-8 divide-y-2 divide-gray-100">
-				<div class="flex flex-wrap gap-1 py-8 md:flex-nowrap">
-					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
-						<span class="title-font font-semibold text-gray-700 dark:text-neutral-100"
-							>{equipment.toLocaleUpperCase()}</span
-						>
-					</div>
-					<div class="md:flex-grow">
-						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900 dark:text-neutral-100">
-							{equipment.toLocaleUpperCase()}'s Data
-						</h2>
-						<div class="grid grid-cols-1 gap-2 divide-y leading-relaxed dark:divide-neutral-100">
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Cost:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{previewData[equipment].cost ?? 'No input or invalid!'}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Mileage:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{previewData[equipment].mileage ?? 'No Input or invalid!'}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Lifespan:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{previewData[equipment].lifespan ?? 'No Input or invalid!'}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Is used?:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">{previewData[equipment].isUsed ? 'Yes' : 'No'}</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Operation years:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{previewData[equipment].yearsInOperation ?? 'No input or invalid!'}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Salvage Value:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{previewData[equipment].salvageValue ?? 'No input or invalid!'}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{previewData[equipment].depreciationRate ?? 'No input or invalid!'}
-								</p>
+	<div class="container mx-auto px-5 py-24">
+		<section class="body-font overflow-hidden text-gray-600">
+			{#each data.equipments as equipment}
+				<div class="-my-8 divide-y-2 divide-gray-100">
+					<div class="flex flex-wrap gap-1 py-8 md:flex-nowrap">
+						<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
+							<span class="title-font font-semibold text-gray-700 dark:text-neutral-100"
+								>{equipment.toLocaleUpperCase()}</span
+							>
+						</div>
+						<div class="md:flex-grow">
+							<h2 class="title-font mb-2 text-2xl font-medium text-gray-900 dark:text-neutral-100">
+								{equipment.toLocaleUpperCase()}'s Data
+							</h2>
+							<div class="grid grid-cols-1 gap-2 divide-y leading-relaxed dark:divide-neutral-100">
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Cost:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].cost ?? 'No input or invalid!'}
+									</p>
+								</div>
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Mileage:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].mileage ?? 'No Input or invalid!'}
+									</p>
+								</div>
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Lifespan:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].lifespan ?? 'No Input or invalid!'}
+									</p>
+								</div>
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Is used?:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].isUsed ? 'Yes' : 'No'}
+									</p>
+								</div>
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Operation years:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].yearsInOperation ?? 'No input or invalid!'}
+									</p>
+								</div>
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Salvage Value:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].salvageValue ?? 'No input or invalid!'}
+									</p>
+								</div>
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].depreciationRate ?? 'No input or invalid!'}
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		{/each}
-	</section>
+			{/each}
+		</section>
+	</div>
 </div>
 
 <style lang="postcss">

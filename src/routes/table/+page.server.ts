@@ -12,5 +12,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		if (availableEquipments.includes(key)) equipments.push(key);
 	}
 
+	console.log(equipments);
+
 	return { equipments, username, company };
 };
