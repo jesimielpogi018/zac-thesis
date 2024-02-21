@@ -2,7 +2,6 @@
 	import type { PageData } from './$types';
 	import { equipments } from '$lib/equipments';
 	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms';
 	import { Checkbox, Label, Input, Helper } from 'flowbite-svelte';
 
 	export let data: PageData;
@@ -17,8 +16,6 @@
 <svelte:head>
 	<title>Selection of Equipments</title>
 </svelte:head>
-
-<SuperDebug data={$form} />
 
 <section class="">
 	<div class="mx-auto max-w-2xl px-4 py-8 lg:py-16">
