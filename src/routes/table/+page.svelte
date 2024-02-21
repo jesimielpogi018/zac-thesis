@@ -13,88 +13,128 @@
 	export let data: PageData;
 
 	interface TableData {
-		cost: number;
-		mileage: number;
-		lifespan: number;
+		cost: number | undefined;
+		mileage: number | undefined;
+		lifespan: number | undefined;
 		isUsed: boolean;
-		yearsInOperation: number;
-		salvageValue: number;
-		depreciationRate: number;
+		yearsInOperation: number | undefined;
+		salvageValue: number | undefined;
+		depreciationRate: number | undefined;
 	}
 
-	const previewData: { [key: string]: TableData } = {};
-
-	let excavatorCost: number;
-	let excavatorMileage: number;
-	let excavatorLifespan: number;
+	let excavatorCost: number | undefined = undefined;
+	let excavatorMileage: number | undefined = undefined;
+	let excavatorLifespan: number | undefined = undefined;
 	let excavatorIsUsed: boolean = false;
-	let excavatorYearsInOperation: number;
-	let excavatorSalvageValue: number;
-	let excavatorDepreciationRate: number;
+	let excavatorYearsInOperation: number | undefined = undefined;
+	let excavatorSalvageValue: number | undefined = undefined;
+	let excavatorDepreciationRate: number | undefined = undefined;
 
-	let dumpCost: number;
-	let dumpMileage: number;
-	let dumpLifespan: number;
+	let dumpCost: number | undefined = undefined;
+	let dumpMileage: number | undefined = undefined;
+	let dumpLifespan: number | undefined = undefined;
 	let dumpIsUsed: boolean = false;
-	let dumpYearsInOperation: number;
-	let dumpSalvageValue: number;
-	let dumpDepreciationRate: number;
+	let dumpYearsInOperation: number | undefined = undefined;
+	let dumpSalvageValue: number | undefined = undefined;
+	let dumpDepreciationRate: number | undefined = undefined;
 
-	let rollerCost: number;
-	let rollerMileage: number;
-	let rollerLifespan: number;
+	let rollerCost: number | undefined = undefined;
+	let rollerMileage: number | undefined = undefined;
+	let rollerLifespan: number | undefined = undefined;
 	let rollerIsUsed: boolean = false;
-	let rollerYearsInOperation: number;
-	let rollerSalvageValue: number;
-	let rollerDepreciationRate: number;
+	let rollerYearsInOperation: number | undefined = undefined;
+	let rollerSalvageValue: number | undefined = undefined;
+	let rollerDepreciationRate: number | undefined = undefined;
 
-	let backhoeCost: number;
-	let backhoeMileage: number;
-	let backhoeLifespan: number;
+	let backhoeCost: number | undefined = undefined;
+	let backhoeMileage: number | undefined = undefined;
+	let backhoeLifespan: number | undefined = undefined;
 	let backhoeIsUsed: boolean = false;
-	let backhoeYearsInOperation: number;
-	let backhoeSalvageValue: number;
-	let backhoeDepreciationRate: number;
+	let backhoeYearsInOperation: number | undefined = undefined;
+	let backhoeSalvageValue: number | undefined = undefined;
+	let backhoeDepreciationRate: number | undefined = undefined;
 
-	let bulldozerCost: number;
-	let bulldozerMileage: number;
-	let bulldozerLifespan: number;
+	let bulldozerCost: number | undefined = undefined;
+	let bulldozerMileage: number | undefined = undefined;
+	let bulldozerLifespan: number | undefined = undefined;
 	let bulldozerIsUsed: boolean = false;
-	let bulldozerYearsInOperation: number;
-	let bulldozerSalvageValue: number;
-	let bulldozerDepreciationRate: number;
+	let bulldozerYearsInOperation: number | undefined = undefined;
+	let bulldozerSalvageValue: number | undefined = undefined;
+	let bulldozerDepreciationRate: number | undefined = undefined;
 
-	let graderCost: number;
-	let graderMileage: number;
-	let graderLifespan: number;
+	let graderCost: number | undefined = undefined;
+	let graderMileage: number | undefined = undefined;
+	let graderLifespan: number | undefined = undefined;
 	let graderIsUsed: boolean = false;
-	let graderYearsInOperation: number;
-	let graderSalvageValue: number;
-	let graderDepreciationRate: number;
+	let graderYearsInOperation: number | undefined = undefined;
+	let graderSalvageValue: number | undefined = undefined;
+	let graderDepreciationRate: number | undefined = undefined;
 
-	class Equipment {}
+	let previewData: { [key: string]: TableData } = {};
 
-	// let timerID: NodeJS.Timeout | undefined;
-
-	// function throttle(cb: Function, delay: number) {
-	// 	if (timerID) return;
-
-	// 	timerID = setTimeout(() => {
-	// 		cb();
-	// 		timerID = undefined;
-	// 	}, delay);
-	// }
-
-	// function debounce(cb: Function, delay: number) {
-	// 	clearTimeout(timerID);
-
-	// 	timerID = setTimeout(() => cb(), delay);
-	// }
+	$: {
+		previewData = {
+			excavator: {
+				cost: excavatorCost,
+				mileage: excavatorMileage,
+				lifespan: excavatorLifespan,
+				isUsed: excavatorIsUsed,
+				yearsInOperation: excavatorYearsInOperation,
+				salvageValue: excavatorSalvageValue,
+				depreciationRate: excavatorDepreciationRate
+			},
+			dump: {
+				cost: dumpCost,
+				mileage: dumpMileage,
+				lifespan: dumpLifespan,
+				isUsed: dumpIsUsed,
+				yearsInOperation: dumpYearsInOperation,
+				salvageValue: dumpSalvageValue,
+				depreciationRate: dumpDepreciationRate
+			},
+			roller: {
+				cost: rollerCost,
+				mileage: rollerMileage,
+				lifespan: rollerLifespan,
+				isUsed: rollerIsUsed,
+				yearsInOperation: rollerYearsInOperation,
+				salvageValue: rollerSalvageValue,
+				depreciationRate: rollerDepreciationRate
+			},
+			backhoe: {
+				cost: backhoeCost,
+				mileage: backhoeMileage,
+				lifespan: backhoeLifespan,
+				isUsed: backhoeIsUsed,
+				yearsInOperation: backhoeYearsInOperation,
+				salvageValue: backhoeSalvageValue,
+				depreciationRate: backhoeDepreciationRate
+			},
+			bulldozer: {
+				cost: bulldozerCost,
+				mileage: bulldozerMileage,
+				lifespan: bulldozerLifespan,
+				isUsed: bulldozerIsUsed,
+				yearsInOperation: bulldozerYearsInOperation,
+				salvageValue: bulldozerSalvageValue,
+				depreciationRate: bulldozerDepreciationRate
+			},
+			grader: {
+				cost: graderCost,
+				mileage: graderMileage,
+				lifespan: graderLifespan,
+				isUsed: graderIsUsed,
+				yearsInOperation: graderYearsInOperation,
+				salvageValue: graderSalvageValue,
+				depreciationRate: graderDepreciationRate
+			}
+		};
+	}
 
 	const inputContainer = 'flex w-48 flex-col gap-6';
 	const inputHolder = 'relative h-11 w-full min-w-[200px]';
 	const inputStyle =
-		'form-input border-0 border-b-2 border-neutral-500 bg-inherit text-sm focus:border-black focus:ring-0 dark:placeholder:text-neutral-300 dark:border-neutral-300 dark:focus:border-white';
+		'form-input border-0 border-b-2 border-neutral-500 bg-inherit text-sm focus:border-black focus:ring-0 dark:type="number"  dark:placeholder:text-neutral-300  placeholder:text-neutral-600 dark:border-neutral-300 dark:focus:border-white';
 	const radioInput =
 		"before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border text-primary-500 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-primary-500 checked:before:bg-primary-500 hover:before:opacity-10";
 </script>
@@ -104,9 +144,15 @@
 </svelte:head>
 
 <div class="mx-auto flex max-w-7xl flex-col items-center px-4 py-8 lg:py-16">
-	<h2 class="mb-4 w-full pl-4 text-xl font-bold text-neutral-900">Please complete the form.</h2>
-	<h2 class="mb-4 w-full pl-4 text-lg font-bold text-neutral-600">Username: {data.username}</h2>
-	<h2 class="mb-4 w-full pl-4 text-lg font-bold text-neutral-600">Company: {data.company}</h2>
+	<h2 class="mb-4 w-full pl-4 text-xl font-bold text-neutral-900 dark:text-neutral-100">
+		Please complete the form.
+	</h2>
+	<h2 class="mb-4 w-full pl-4 text-lg font-bold text-neutral-600 dark:text-neutral-200">
+		Username: {data.username}
+	</h2>
+	<h2 class="mb-4 w-full pl-4 text-lg font-bold text-neutral-600 dark:text-neutral-200">
+		Company: {data.company}
+	</h2>
 
 	<Table divClass="rounded-sm relative overflow-x-auto w-full">
 		<TableHead>
@@ -132,21 +178,36 @@
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={excavatorCost} placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={excavatorCost}
+									type="number"
+									placeholder="Cost"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={excavatorMileage} placeholder="Mileage" class={inputStyle} />
+								<input
+									bind:value={excavatorMileage}
+									type="number"
+									placeholder="Mileage"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={excavatorLifespan} placeholder="Lifespan" class={inputStyle} />
+								<input
+									bind:value={excavatorLifespan}
+									type="number"
+									placeholder="Lifespan"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
@@ -193,6 +254,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={excavatorYearsInOperation}
+									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
 								/>
@@ -204,6 +266,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={excavatorSalvageValue}
+									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
 								/>
@@ -215,6 +278,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={excavatorDepreciationRate}
+									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
 								/>
@@ -230,21 +294,31 @@
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={dumpCost} placeholder="Cost" class={inputStyle} />
+								<input bind:value={dumpCost} type="number" placeholder="Cost" class={inputStyle} />
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={dumpMileage} placeholder="Mileage" class={inputStyle} />
+								<input
+									bind:value={dumpMileage}
+									type="number"
+									placeholder="Mileage"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={dumpLifespan} placeholder="Lifespan" class={inputStyle} />
+								<input
+									bind:value={dumpLifespan}
+									type="number"
+									placeholder="Lifespan"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
@@ -291,6 +365,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={dumpYearsInOperation}
+									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
 								/>
@@ -302,6 +377,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={dumpSalvageValue}
+									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
 								/>
@@ -313,6 +389,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={dumpDepreciationRate}
+									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
 								/>
@@ -328,21 +405,36 @@
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={rollerCost} placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={rollerCost}
+									type="number"
+									placeholder="Cost"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={rollerMileage} placeholder="Mileage" class={inputStyle} />
+								<input
+									bind:value={rollerMileage}
+									type="number"
+									placeholder="Mileage"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={rollerLifespan} placeholder="Lifespan" class={inputStyle} />
+								<input
+									bind:value={rollerLifespan}
+									type="number"
+									placeholder="Lifespan"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
@@ -389,6 +481,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={rollerYearsInOperation}
+									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
 								/>
@@ -400,6 +493,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={rollerSalvageValue}
+									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
 								/>
@@ -411,6 +505,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={rollerDepreciationRate}
+									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
 								/>
@@ -426,21 +521,36 @@
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={backhoeCost} placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={backhoeCost}
+									type="number"
+									placeholder="Cost"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={backhoeMileage} placeholder="Mileage" class={inputStyle} />
+								<input
+									bind:value={backhoeMileage}
+									type="number"
+									placeholder="Mileage"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={backhoeLifespan} placeholder="Lifespan" class={inputStyle} />
+								<input
+									bind:value={backhoeLifespan}
+									type="number"
+									placeholder="Lifespan"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
@@ -487,6 +597,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={backhoeYearsInOperation}
+									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
 								/>
@@ -498,6 +609,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={backhoeSalvageValue}
+									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
 								/>
@@ -509,6 +621,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={backhoeDepreciationRate}
+									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
 								/>
@@ -524,21 +637,36 @@
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={bulldozerCost} placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={bulldozerCost}
+									type="number"
+									placeholder="Cost"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={bulldozerMileage} placeholder="Mileage" class={inputStyle} />
+								<input
+									bind:value={bulldozerMileage}
+									type="number"
+									placeholder="Mileage"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={bulldozerLifespan} placeholder="Lifespan" class={inputStyle} />
+								<input
+									bind:value={bulldozerLifespan}
+									type="number"
+									placeholder="Lifespan"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
@@ -585,6 +713,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={bulldozerYearsInOperation}
+									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
 								/>
@@ -596,6 +725,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={bulldozerSalvageValue}
+									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
 								/>
@@ -607,6 +737,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={bulldozerDepreciationRate}
+									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
 								/>
@@ -622,21 +753,36 @@
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input type="text" bind:value={graderCost} placeholder="Cost" class={inputStyle} />
+								<input
+									bind:value={graderCost}
+									type="number"
+									placeholder="Cost"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={graderMileage} placeholder="Mileage" class={inputStyle} />
+								<input
+									bind:value={graderMileage}
+									type="number"
+									placeholder="Mileage"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
 						<div class={inputContainer}>
 							<div class={inputHolder}>
-								<input bind:value={graderLifespan} placeholder="Lifespan" class={inputStyle} />
+								<input
+									bind:value={graderLifespan}
+									type="number"
+									placeholder="Lifespan"
+									class={inputStyle}
+								/>
 							</div>
 						</div>
 					</TableBodyCell>
@@ -683,6 +829,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={graderYearsInOperation}
+									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
 								/>
@@ -694,6 +841,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={graderSalvageValue}
+									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
 								/>
@@ -705,6 +853,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={graderDepreciationRate}
+									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
 								/>
@@ -717,63 +866,92 @@
 	</Table>
 
 	<br />
-
+</div>
+<div class="container mx-auto px-5 py-24">
 	<section class="body-font overflow-hidden text-gray-600">
-		<div class="container mx-auto px-5 py-24">
+		{#each data.equipments as equipment}
 			<div class="-my-8 divide-y-2 divide-gray-100">
-				<div class="flex flex-wrap py-8 md:flex-nowrap">
+				<div class="flex flex-wrap gap-1 py-8 md:flex-nowrap">
 					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
-						<span class="title-font font-semibold text-gray-700">Excavator</span>
+						<span class="title-font font-semibold text-gray-700 dark:text-neutral-100"
+							>{equipment.toLocaleUpperCase()}</span
+						>
 					</div>
 					<div class="md:flex-grow">
-						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">Excavator's Data</h2>
+						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900 dark:text-neutral-100">
+							{equipment.toLocaleUpperCase()}'s Data
+						</h2>
 						<div class="grid grid-cols-1 gap-2 divide-y leading-relaxed dark:divide-neutral-100">
 							<div class="grid w-full grid-cols-2 gap-2">
 								<p class="dark:text-neutral-100">
 									Cost:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
-								<p class="dark:text-neutral-100">{excavatorCost ?? 'No input yet!'}</p>
+								<p class="dark:text-neutral-100">
+									{previewData[equipment].cost ?? 'No input yet!'}
+								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
 								<p class="dark:text-neutral-100">
 									Mileage:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
-								<p class="dark:text-neutral-100">{excavatorCost}</p>
+								<p class="dark:text-neutral-100">
+									{previewData[equipment].mileage ?? 'No Input yet!'}
+								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
 								<p class="dark:text-neutral-100">
 									Lifespan:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
-								<p class="dark:text-neutral-100">{excavatorCost}</p>
+								<p class="dark:text-neutral-100">
+									{previewData[equipment].lifespan ?? 'No Input yet!'}
+								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
 								<p class="dark:text-neutral-100">
 									Is used?:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
-								<p class="dark:text-neutral-100">{excavatorCost}</p>
+								<p class="dark:text-neutral-100">{previewData[equipment].isUsed ? 'Yes' : 'No'}</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
 								<p class="dark:text-neutral-100">
 									Operation years:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
-								<p class="dark:text-neutral-100">{excavatorCost}</p>
+								<p class="dark:text-neutral-100">
+									{previewData[equipment].yearsInOperation ?? 'No input yet!'}
+								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
 								<p class="dark:text-neutral-100">
 									Salvage Value:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
-								<p class="dark:text-neutral-100">{excavatorCost}</p>
+								<p class="dark:text-neutral-100">
+									{previewData[equipment].salvageValue ?? 'No input yet!'}
+								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
 								<p class="dark:text-neutral-100">
 									Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
-								<p class="dark:text-neutral-100">{excavatorCost}</p>
+								<p class="dark:text-neutral-100">
+									{previewData[equipment].depreciationRate ?? 'No input yet!'}
+								</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{/each}
 	</section>
 </div>
+
+<style lang="postcss">
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+</style>
