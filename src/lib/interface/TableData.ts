@@ -1,4 +1,4 @@
-export interface TableData<Default> {
+export interface TableData<Default = number> {
 	cost: number | Default;
 	mileage: number | Default;
 	lifespan: number | Default;
