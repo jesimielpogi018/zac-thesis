@@ -2,6 +2,7 @@
 	import { AppShell, LightSwitch } from '@skeletonlabs/skeleton';
 
 	import 'flowbite';
+	import 'animate.css';
 	import '../app.pcss';
 
 	import { Navbar, NavBrand } from 'flowbite-svelte';

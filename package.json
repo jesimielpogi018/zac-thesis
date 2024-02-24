@@ -44,6 +44,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"animate.css": "^4.1.1",
 		"bits-ui": "^0.18.1",
 		"clsx": "^2.1.0",
 		"flowbite-svelte-icons": "^1.4.0",
