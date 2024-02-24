@@ -4,17 +4,17 @@ interface Inputs {
 	rate: number;
 	years: number;
 	expected: number;
-	mileage: number | undefined;
-	lifespan: number | undefined;
+	mileage: number;
+	lifespan: number;
 }
 
 export function calculateDDB(i: Inputs): number {
-	const over: number | undefined = i.mileage ? i.mileage : i.lifespan;
+	const over: number = i.mileage ? i.mileage : i.lifespan;
 	const accumulatedDepreciation = calculateAccumulatedDepreciation(i.rate, i.years);
 	const bookValue = calculateBookValue(i.cost, accumulatedDepreciation);
 
 	try {
-		return 2 * (i.cost / (over as number)) * bookValue;
+		return 2 * (i.cost / over) * bookValue;
 	} catch (e) {
 		console.log(e);
 		return -1;
