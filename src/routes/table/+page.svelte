@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import {
 		Table,
 		TableBody,
@@ -8,26 +9,20 @@
 		TableHeadCell
 	} from 'flowbite-svelte';
 	import CheckboxRipple from '$lib/components/owned/CheckboxRipple.svelte';
+	import type { TableData } from '$lib/interface/TableData';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	interface TableData {
-		cost: number | undefined;
-		mileage: number | undefined;
-		lifespan: number | undefined;
-		isUsed: boolean;
-		yearsInOperation: number | undefined;
-		salvageValue: number | undefined;
-		depreciationRate: number | undefined;
-	}
+	$: isDisabled = false;
 
-	let previewData: { [key: string]: TableData } = {};
+	let previewData: { [key: string]: TableData<undefined> } = {};
 
 	for (const i in data.equipments) {
 		previewData[data.equipments[i]] = {
 			cost: undefined,
 			mileage: undefined,
+			expected: undefined,
 			lifespan: undefined,
 			isUsed: false,
 			yearsInOperation: undefined,
@@ -35,6 +30,59 @@
 			depreciationRate: undefined
 		};
 	}
+
+	function handleOnInput() {
+		console.log('something changes');
+
+		for (const equipment of Object.keys(previewData)) {
+			if (previewData[equipment].cost == null) {
+				isDisabled = true;
+				return;
+			}
+
+			if (previewData[equipment].mileage == null) {
+				isDisabled = true;
+				return;
+			}
+
+			if (previewData[equipment].expected == null) {
+				isDisabled = true;
+				return;
+			}
+
+			if (previewData[equipment].lifespan == null) {
+				isDisabled = true;
+				return;
+			}
+
+			if (previewData[equipment].yearsInOperation == null) {
+				isDisabled = true;
+				return;
+			}
+
+			if (previewData[equipment].salvageValue == null) {
+				isDisabled = true;
+				return;
+			}
+
+			if (previewData[equipment].depreciationRate == null) {
+				isDisabled = true;
+				return;
+			}
+			isDisabled = false;
+		}
+	}
+
+	function handleFinalize() {
+		fetch('/api/finalize', { method: 'POST', body: JSON.stringify(previewData) })
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((error) => console.log(error));
+	}
+
+	onMount(() => {
+		handleOnInput();
+	});
 
 	const inputContainer = 'flex w-48 flex-col gap-6';
 	const inputHolder = 'relative h-11 w-full min-w-[200px]';
@@ -65,6 +113,7 @@
 			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100"
 				>Cost of Equipment</TableHeadCell
 			>
+			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Expected Output</TableHeadCell>
 			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Mileage</TableHeadCell>
 			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Lifespan</TableHeadCell>
 			<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Is used?</TableHeadCell>
@@ -85,6 +134,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={previewData[equipment].cost}
+									on:input={handleOnInput}
 									type="number"
 									placeholder="Cost"
 									class={inputStyle}
@@ -96,7 +146,21 @@
 						<div class={inputContainer}>
 							<div class={inputHolder}>
 								<input
+									bind:value={previewData[equipment].expected}
+									on:input={handleOnInput}
+									type="number"
+									placeholder="Expected Output"
+									class={inputStyle}
+								/>
+							</div>
+						</div>
+					</TableBodyCell>
+					<TableBodyCell class="dark:bg-[#383838]">
+						<div class={inputContainer}>
+							<div class={inputHolder}>
+								<input
 									bind:value={previewData[equipment].mileage}
+									on:input={handleOnInput}
 									type="number"
 									placeholder="Mileage"
 									class={inputStyle}
@@ -109,6 +173,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={previewData[equipment].lifespan}
+									on:input={handleOnInput}
 									type="number"
 									placeholder="Lifespan"
 									class={inputStyle}
@@ -159,6 +224,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={previewData[equipment].yearsInOperation}
+									on:input={handleOnInput}
 									type="number"
 									placeholder="Operation years"
 									class={inputStyle}
@@ -171,6 +237,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={previewData[equipment].salvageValue}
+									on:input={handleOnInput}
 									type="number"
 									placeholder="Salvage Value"
 									class={inputStyle}
@@ -183,6 +250,7 @@
 							<div class={inputHolder}>
 								<input
 									bind:value={previewData[equipment].depreciationRate}
+									on:input={handleOnInput}
 									type="number"
 									placeholder="Depreciation Rate"
 									class={inputStyle}
@@ -217,6 +285,14 @@
 									</p>
 									<p class="dark:text-neutral-100">
 										{previewData[equipment].cost ?? 'No input or invalid!'}
+									</p>
+								</div>
+								<div class="grid w-full grid-cols-2 gap-2">
+									<p class="dark:text-neutral-100">
+										Expected Output:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									</p>
+									<p class="dark:text-neutral-100">
+										{previewData[equipment].expected ?? 'No input or invalid!'}
 									</p>
 								</div>
 								<div class="grid w-full grid-cols-2 gap-2">
@@ -274,6 +350,13 @@
 			{/each}
 		</section>
 	</div>
+
+	<button
+		disabled={isDisabled}
+		on:click={handleFinalize}
+		type="button"
+		class="variant-filled-primary btn rounded">Finalize</button
+	>
 </div>
 
 <style lang="postcss">
