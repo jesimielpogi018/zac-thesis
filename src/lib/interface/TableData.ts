@@ -1,10 +1,10 @@
-export interface TableData {
-	cost: number;
-	mileage: number;
-	lifespan: number;
+export interface TableData<Default> {
+	cost: number | Default;
+	mileage: number | Default;
+	lifespan: number | Default;
 	isUsed: boolean;
-	yearsInOperation: number;
-	salvageValue: number;
-	depreciationRate: number;
-	expected: number;
+	yearsInOperation: number | Default;
+	salvageValue: number | Default;
+	depreciationRate: number | Default;
+	expected: number | Default;
 }
