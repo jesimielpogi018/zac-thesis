@@ -10,7 +10,7 @@
 
 	let isDisabled: boolean;
 
-	$: isDisabled = $form.equipments.length === 0;
+	$: isDisabled = $form.equipments.length === 0 || $form.equipments.length < 0;
 </script>
 
 <svelte:head>
@@ -19,14 +19,18 @@
 
 <section>
 	<div class="mx-auto max-w-2xl px-4 py-8 lg:py-16">
-		<h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+		<h2
+			class="animate__animated animate__slideInLeft mb-4 text-xl font-bold text-gray-900 dark:text-white"
+		>
 			Welcome! Please fill up the form.
 		</h2>
 		<form method="POST" use:enhance>
 			<div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 				<div class="w-full">
-					<Label for="username" class="mb-2 block" color={$errors.username ? 'red' : 'gray'}
-						>Username</Label
+					<Label
+						for="username"
+						class="animate__animated animate__slideInLeft mb-2 block"
+						color={$errors.username ? 'red' : 'gray'}>Username</Label
 					>
 					<Input
 						type="text"
@@ -36,6 +40,7 @@
 						bind:value={$form.username}
 						aria-invalid={$errors.username ? 'true' : undefined}
 						color={$errors.username ? 'red' : 'base'}
+						class="animate__animated animate__slideInLeft"
 					/>
 					{#if $errors.username}
 						<Helper class="mt-2" color="red"
@@ -44,8 +49,10 @@
 					{/if}
 				</div>
 				<div class="w-full">
-					<Label for="company" class="mb-2 block" color={$errors.company ? 'red' : 'gray'}
-						>Company</Label
+					<Label
+						for="company"
+						class="animate__animated animate__slideInRight animate__delay__100ms mb-2 block"
+						color={$errors.company ? 'red' : 'gray'}>Company</Label
 					>
 					<Input
 						type="text"
@@ -55,6 +62,7 @@
 						bind:value={$form.company}
 						aria-invalid={$errors.company ? 'true' : undefined}
 						color={$errors.company ? 'red' : 'base'}
+						class="animate__animated animate__slideInRight"
 					/>
 					{#if $errors.company}
 						<Helper class="mt-2" color="red"
