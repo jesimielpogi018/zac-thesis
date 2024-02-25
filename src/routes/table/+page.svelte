@@ -18,8 +18,11 @@
 
 	let previewData: { [key: string]: TableData<undefined> } = {};
 
-	for (const i in data.equipments) {
-		previewData[data.equipments[i]] = {
+	let formSubscriptionList: Function[] = [];
+	let errorSubscriptionList: Function[] = [];
+
+	for (const i in data.equipmentForms) {
+		previewData[data.equipmentForms[i][0]] = {
 			cost: undefined,
 			mileage: undefined,
 			expected: undefined,
@@ -32,8 +35,6 @@
 	}
 
 	function handleOnInput() {
-		console.log('something changes');
-
 		for (const equipment of Object.keys(previewData)) {
 			if (previewData[equipment].cost == null) {
 				isDisabled = true;
@@ -82,12 +83,17 @@
 
 	onMount(() => {
 		handleOnInput();
+
+		return function cleanup() {
+			formSubscriptionList.map((f) => f());
+			errorSubscriptionList.map((f) => f());
+		};
 	});
 
 	const inputContainer = 'flex w-48 flex-col gap-6';
 	const inputHolder = 'relative h-11 w-full min-w-[200px]';
 	const inputStyle =
-		'form-input border-0 border-b-2 border-neutral-500 bg-inherit text-sm focus:border-black focus:ring-0 dark:type="number"  dark:placeholder:text-neutral-300  placeholder:text-neutral-600 dark:border-neutral-300 dark:focus:border-white';
+		'block w-full p-2 w-24 form-input border-0 border-b-2 border-neutral-500 bg-inherit text-sm focus:border-black focus:ring-0 dark:type="number"  dark:placeholder:text-neutral-300  placeholder:text-neutral-500 dark:border-neutral-300 dark:focus:border-white';
 	const radioInput =
 		"before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border text-primary-500 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-primary-500 checked:before:bg-primary-500 hover:before:opacity-10";
 </script>
@@ -126,7 +132,7 @@
 			>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y">
-			{#each data.equipments as equipment}
+			{#each data.equipmentForms as [equipment, form], index}
 				<TableBodyRow>
 					<TableBodyCell class="dark:bg-[#383838]">{equipment.toLocaleUpperCase()}</TableBodyCell>
 					<TableBodyCell class="dark:bg-[#383838]">
@@ -266,7 +272,7 @@
 	<br />
 	<div class="container mx-auto px-5 py-24">
 		<section class="body-font overflow-hidden text-gray-600">
-			{#each data.equipments as equipment}
+			{#each data.equipmentForms as [equipment, form]}
 				<div class="-my-8 divide-y-2 divide-gray-100">
 					<div class="flex flex-wrap gap-1 py-8 md:flex-nowrap">
 						<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
@@ -340,7 +346,9 @@
 										Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									</p>
 									<p class="dark:text-neutral-100">
-										{previewData[equipment].depreciationRate ?? 'No input or invalid!'}
+										{previewData[equipment].depreciationRate !== null
+											? `${previewData[equipment].depreciationRate}%`
+											: 'No input or invalid!'}
 									</p>
 								</div>
 							</div>

@@ -35,5 +35,5 @@ export const load: PageServerLoad = async ({ url }) => {
 		console.log(equipmentForms[i][0], equipmentForms[i][1]);
 	}
 
-	return { equipments, username, company, equipmentForms, baseForm };
+	return { username, company, equipmentForms, baseForm };
 };
