@@ -4,6 +4,12 @@ import type { ResponseData } from '$lib/interface/ResponseData';
 import type { TableData } from '$lib/interface/TableData';
 import * as solve from '$lib/utils/Formulas';
 
+import type { Config } from '@sveltejs/adapter-vercel';
+
+export const config: Config = {
+	runtime: 'edge'
+};
+
 export const POST: RequestHandler = async ({ request }) => {
 	const body = (await request.json()) as { [key: string]: TableData };
 
