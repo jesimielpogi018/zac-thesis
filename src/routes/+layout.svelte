@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { AppShell, LightSwitch } from '@skeletonlabs/skeleton';
 
-	import 'flowbite';
 	import 'animate.css';
 	import '../app.pcss';
+	import 'flowbite';
 
 	import { Navbar, NavBrand } from 'flowbite-svelte';
 </script>
