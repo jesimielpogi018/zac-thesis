@@ -25,15 +25,5 @@ export const load: PageServerLoad = async ({ url }) => {
 		equipmentForms.push([equipments[i], form]);
 	}
 
-	console.log('username: ', username);
-	console.log('company: ', company);
-	console.log('equipments: ', equipments);
-	console.log('baseForm: ', baseForm);
-	console.log('equipmentForms: ', equipmentForms);
-
-	for (const i in equipmentForms) {
-		console.log(equipmentForms[i][0], equipmentForms[i][1]);
-	}
-
 	return { username, company, equipmentForms, baseForm };
 };
