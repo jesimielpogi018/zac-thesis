@@ -8,6 +8,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const body = (await request.json()) as { [key: string]: TableData };
 
 	const res: { [key: string]: ResponseData } = {};
+	const response: string[][] = [];
 
 	for (const [key, value] of Object.entries(body)) {
 		const i = {
@@ -32,7 +33,15 @@ export const POST: RequestHandler = async ({ request }) => {
 		};
 	}
 
-	console.log(body);
+	for (const [outerKey, outerValue] of Object.entries(res)) {
+		for (const [innerKey, innerValue] of Object.entries(outerValue)) {
+			response.push([`${outerKey}_${innerKey}`, innerValue]);
+		}
+	}
+
+	const url = new URLSearchParams(response).toString();
+
+	console.log(response, url);
 
 	return json({ message: 'Working Just Fine!', data: res });
 };

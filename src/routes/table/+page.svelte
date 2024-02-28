@@ -346,7 +346,7 @@
 										Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									</p>
 									<p class="dark:text-neutral-100">
-										{previewData[equipment].depreciationRate !== null
+										{previewData[equipment].depreciationRate !== undefined
 											? `${previewData[equipment].depreciationRate}%`
 											: 'No input or invalid!'}
 									</p>
