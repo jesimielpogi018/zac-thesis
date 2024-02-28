@@ -11,6 +11,7 @@
 	import CheckboxRipple from '$lib/components/owned/CheckboxRipple.svelte';
 	import type { TableData } from '$lib/interface/TableData';
 	import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -77,7 +78,7 @@
 	function handleFinalize() {
 		fetch('/api/finalize', { method: 'POST', body: JSON.stringify(previewData) })
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then((data) => goto('/final?' + data.url))
 			.catch((error) => console.log(error));
 	}
 

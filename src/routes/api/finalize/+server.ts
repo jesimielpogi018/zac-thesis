@@ -41,7 +41,5 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const url = new URLSearchParams(response).toString();
 
-	console.log(response, url);
-
-	return json({ message: 'Working Just Fine!', data: res });
+	return json({ url });
 };
