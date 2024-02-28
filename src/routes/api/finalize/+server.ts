@@ -20,7 +20,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			years: value.yearsInOperation as number
 		};
 
-		const accumulatedDepreciation = solve.calculateAccumulatedDepreciation(i.rate, i.years);
+		const accumulatedDepreciation = solve.calculateAccumulatedDepreciation(i.rate / 100, i.years);
 		const bookValue = solve.calculateBookValue(i.cost, accumulatedDepreciation);
 		const outputDepreciationRate = solve.outputDepreciationRate(i.cost, i.salvage, i.expected);
 

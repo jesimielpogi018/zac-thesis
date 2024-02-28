@@ -10,7 +10,7 @@ interface Inputs {
 
 export function calculateDDB(i: Inputs): number {
 	const over: number = i.mileage ? i.mileage : i.lifespan;
-	const accumulatedDepreciation = calculateAccumulatedDepreciation(i.rate, i.years);
+	const accumulatedDepreciation = calculateAccumulatedDepreciation(i.rate / 100, i.years);
 	const bookValue = calculateBookValue(i.cost, accumulatedDepreciation);
 
 	try {
