@@ -28,7 +28,7 @@
 									DDB:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{values.DDB ?? 'No input or invalid!'}
+									{values.DDB}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -36,7 +36,7 @@
 									Book Value:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{values.BOOK_VALUE ?? 'No input or invalid!'}
+									{values.BOOK_VALUE}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -44,7 +44,7 @@
 									Accumulated Depreciation:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{values.ACCUMULATED_DEPRECIATION ?? 'No Input or invalid!'}
+									{values.ACCUMULATED_DEPRECIATION}
 								</p>
 							</div>
 							<div class="grid w-full grid-cols-2 gap-2">
@@ -52,7 +52,7 @@
 									Output Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								</p>
 								<p class="dark:text-neutral-100">
-									{values.OUTPUT_DEPRECIATION_RATE ?? 'No Input or invalid!'}
+									{values.OUTPUT_DEPRECIATION_RATE}
 								</p>
 							</div>
 						</div>
