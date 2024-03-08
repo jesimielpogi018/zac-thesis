@@ -13,8 +13,7 @@ export function calculateSalvageValue(i: Inputs): number {
 
 export function calculateDDB(i: Inputs): number {
 	const over: number = i.mileage ? i.mileage : i.lifespan;
-	const accumulatedDepreciation = calculateAccumulatedDepreciation(i.rate / 100, i.years);
-	const bookValue = calculateBookValue(i.cost, accumulatedDepreciation);
+	const bookValue = calculateBookValue(i.rate, i.cost, i.years);
 
 	try {
 		return 2 * (i.cost / over) * bookValue;
@@ -24,14 +23,33 @@ export function calculateDDB(i: Inputs): number {
 	}
 }
 
-export function outputDepreciationRate(cost: number, salvage: number, expected: number): number {
-	return (cost - salvage) / expected;
+export function outputDepreciationRate(bookValue: number, salvageValue: number, expected: number): number {
+	return (bookValue - salvageValue) / expected;
 }
 
-export function calculateBookValue(cost: number, accumulatedDepreciation: number): number {
-	return cost - accumulatedDepreciation;
+export function calculateBookValue(rate: number, cost: number, years: number): number {
+	let result = cost;
+
+	while (years >= 1) {
+		result -= (rate / 100) * result;
+
+		years--;
+	}
+
+	return result;
 }
 
-export function calculateAccumulatedDepreciation(rate: number, years: number): number {
-	return (rate / 100) * years;
+export function calculateAccumulatedDepreciation(rate: number, cost: number, years: number): number {
+	let result = cost;
+	let depreciation = 0;
+
+	while (years > 1) {
+		result -= (rate / 100) * result;
+
+		if (years >= 1) depreciation = (rate / 100) * result;
+
+		years--;
+	}
+
+	return depreciation;
 }

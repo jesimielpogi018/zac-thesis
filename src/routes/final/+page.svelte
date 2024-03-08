@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { toCurrency } from '$lib/utils/FormatCurrency';
 	import { Table, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell } from 'flowbite-svelte';
 
 	export let data: PageData;
 
-	console.log(data.data);
 </script>
 
 <svelte:head>
@@ -22,17 +22,17 @@
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Book Value</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Salvage Value</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Accumulated Depreciation</TableHeadCell>
-				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Output Depreciation Rate</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Output Depreciation</TableHeadCell>
 			</TableHead>
 			<TableBody tableBodyClass="divide-y">
 				{#each Object.entries(data.data) as [equipment, values]}
 					<TableBodyRow>
 						<TableBodyCell class="dark:bg-[#383838]">{equipment.toLocaleUpperCase()}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{values.DDB}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{values.BOOK_VALUE}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{values.SALVAGE_VALUE}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{values.ACCUMULATED_DEPRECIATION}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{values.OUTPUT_DEPRECIATION_RATE}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.DDB * 100) / 100).toFixed(2))}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.BOOK_VALUE * 100) / 100).toFixed(2))}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.SALVAGE_VALUE * 100) / 100).toFixed(2))}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.ACCUMULATED_DEPRECIATION * 100) / 100).toFixed(2))}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.OUTPUT_DEPRECIATION_RATE * 100) / 100).toFixed(2))}</TableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
