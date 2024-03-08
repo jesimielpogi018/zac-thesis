@@ -7,6 +7,5 @@ export const schema = z.object({
 	lifespan: z.number(),
 	isUsed: z.boolean(),
 	years: z.number(),
-	salvage: z.number(),
 	rate: z.number()
 });

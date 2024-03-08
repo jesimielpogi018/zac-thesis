@@ -4,7 +4,6 @@ export interface TableData<Default = number> {
 	lifespan: number | Default;
 	isUsed: boolean;
 	yearsInOperation: number | Default;
-	salvageValue: number | Default;
 	depreciationRate: number | Default;
 	expected: number | Default;
 }
