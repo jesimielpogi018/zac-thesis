@@ -33,5 +33,5 @@ export function calculateBookValue(cost: number, accumulatedDepreciation: number
 }
 
 export function calculateAccumulatedDepreciation(rate: number, years: number): number {
-	return rate * years;
+	return (rate / 100) * years;
 }
