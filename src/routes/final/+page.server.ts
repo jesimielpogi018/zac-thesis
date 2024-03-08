@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const accumulatedDepreciation = 'ACCUMULATED_DEPRECIATION';
 	const outputDepreciationRate = 'OUTPUT_DEPRECIATION_RATE';
 
-	const data: { [key: string]: Partial<ResponseData> } = {};
+	const data: { [key: string]: ResponseData } = {};
 
 	for (const equipment of equipments) {
 		let solution: Partial<ResponseData> = {};
@@ -34,7 +34,7 @@ export const load: PageServerLoad = async ({ url }) => {
 
 		if (Object.keys(solution).length === 0) break;
 
-		data[equipment] = solution;
+		data[equipment] = solution as ResponseData;
 	}
 
 	return { data };
