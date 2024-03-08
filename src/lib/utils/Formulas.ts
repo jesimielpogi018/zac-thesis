@@ -1,11 +1,14 @@
 interface Inputs {
 	cost: number;
-	salvage: number;
 	rate: number;
 	years: number;
 	expected: number;
 	mileage: number;
 	lifespan: number;
+}
+
+export function calculateSalvageValue(i: Inputs): number {
+	return i.cost * (1 - i.rate / 100) ** i.years;
 }
 
 export function calculateDDB(i: Inputs): number {
