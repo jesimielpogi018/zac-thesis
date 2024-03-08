@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { Table, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell } from 'flowbite-svelte';
 
 	export let data: PageData;
 </script>
@@ -10,55 +11,27 @@
 
 <div class="container mx-auto px-5 py-24">
 	<section class="body-font overflow-hidden text-gray-600">
-		{#each Object.entries(data.data) as [equipment, values]}
-			<div class="-my-8 divide-y-2 divide-gray-100">
-				<div class="flex flex-wrap gap-1 py-8 md:flex-nowrap">
-					<div class="mb-6 flex flex-shrink-0 flex-col md:mb-0 md:w-64">
-						<span class="title-font font-semibold text-gray-700 dark:text-neutral-100"
-							>{equipment.toLocaleUpperCase()}</span
-						>
-					</div>
-					<div class="md:flex-grow">
-						<h2 class="title-font mb-2 text-2xl font-medium text-gray-900 dark:text-neutral-100">
-							{equipment.toLocaleUpperCase()}'s Data
-						</h2>
-						<div class="grid grid-cols-1 gap-2 divide-y leading-relaxed dark:divide-neutral-100">
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									DDB:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{values.DDB}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Book Value:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{values.BOOK_VALUE}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Accumulated Depreciation:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{values.ACCUMULATED_DEPRECIATION}
-								</p>
-							</div>
-							<div class="grid w-full grid-cols-2 gap-2">
-								<p class="dark:text-neutral-100">
-									Output Depreciation Rate:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								</p>
-								<p class="dark:text-neutral-100">
-									{values.OUTPUT_DEPRECIATION_RATE}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		{/each}
+		<h1 class="title-font mb-5 text-3xl font-medium dark:text-neutral-200">Finalize Output</h1>
+
+		<Table divClass="rounded-sm relative overflow-x-auto w-full">
+			<TableHead>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Equipment</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">DDB</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Book values</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Accumulated Depreciation</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Output Depreciation Rate</TableHeadCell>
+			</TableHead>
+			<TableBody tableBodyClass="divide-y">
+				{#each Object.entries(data.data) as [equipment, values]}
+					<TableBodyRow>
+						<TableBodyCell class="dark:bg-[#383838]">{equipment.toLocaleUpperCase()}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{values.DDB}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{values.BOOK_VALUE}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{values.ACCUMULATED_DEPRECIATION}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{values.OUTPUT_DEPRECIATION_RATE}</TableBodyCell>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
 	</section>
 </div>

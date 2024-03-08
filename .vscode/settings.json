@@ -5,5 +5,7 @@
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
 	"editor.hover.delay": 500,
-	"editor.quickSuggestionsDelay": 1000
+	"editor.quickSuggestionsDelay": 1000,
+	"editor.wordWrap": "wordWrapColumn",
+	"editor.wordWrapColumn": 200, 
 }
