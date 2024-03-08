@@ -34,17 +34,12 @@
 				return;
 			}
 
-			if (previewData[equipment].mileage == null) {
+			if (previewData[equipment].mileage == null && previewData[equipment].lifespan == null) {
 				isDisabled = true;
 				return;
 			}
 
 			if (previewData[equipment].expected == null) {
-				isDisabled = true;
-				return;
-			}
-
-			if (previewData[equipment].lifespan == null) {
 				isDisabled = true;
 				return;
 			}
