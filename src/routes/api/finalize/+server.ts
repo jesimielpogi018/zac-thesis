@@ -17,16 +17,17 @@ export const POST: RequestHandler = async ({ request }) => {
 			lifespan: value.lifespan as number,
 			mileage: value.mileage as number,
 			rate: value.depreciationRate as number,
-			salvage: value.salvageValue as number,
 			years: value.yearsInOperation as number
 		};
 
 		const accumulatedDepreciation = solve.calculateAccumulatedDepreciation(i.rate / 100, i.years);
+		const salvage = solve.calculateSalvageValue(i);
 		const bookValue = solve.calculateBookValue(i.cost, accumulatedDepreciation);
-		const outputDepreciationRate = solve.outputDepreciationRate(i.cost, i.salvage, i.expected);
+		const outputDepreciationRate = solve.outputDepreciationRate(i.cost, salvage, i.expected);
 
 		res[key] = {
 			DDB: solve.calculateDDB(i),
+			SALVAGE_VALUE: salvage,
 			ACCUMULATED_DEPRECIATION: accumulatedDepreciation,
 			BOOK_VALUE: bookValue,
 			OUTPUT_DEPRECIATION_RATE: outputDepreciationRate

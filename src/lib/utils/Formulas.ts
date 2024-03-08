@@ -8,7 +8,7 @@ interface Inputs {
 }
 
 export function calculateSalvageValue(i: Inputs): number {
-	return i.cost * (1 - i.rate / 100) ** i.years;
+	return i.cost * Math.pow(1 - i.rate / 100, i.years);
 }
 
 export function calculateDDB(i: Inputs): number {

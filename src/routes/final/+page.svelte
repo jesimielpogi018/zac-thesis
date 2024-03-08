@@ -3,6 +3,8 @@
 	import { Table, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell } from 'flowbite-svelte';
 
 	export let data: PageData;
+
+	console.log(data.data);
 </script>
 
 <svelte:head>
@@ -17,7 +19,8 @@
 			<TableHead>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Equipment</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">DDB</TableHeadCell>
-				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Book values</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Book Value</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Salvage Value</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Accumulated Depreciation</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Output Depreciation Rate</TableHeadCell>
 			</TableHead>
@@ -27,6 +30,7 @@
 						<TableBodyCell class="dark:bg-[#383838]">{equipment.toLocaleUpperCase()}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{values.DDB}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{values.BOOK_VALUE}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{values.SALVAGE_VALUE}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{values.ACCUMULATED_DEPRECIATION}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{values.OUTPUT_DEPRECIATION_RATE}</TableBodyCell>
 					</TableBodyRow>
