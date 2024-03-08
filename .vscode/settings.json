@@ -1,3 +1,9 @@
 {
-	"cSpell.words": ["pcss"]
+	"cSpell.words": ["pcss"],
+	"files.autoSave": "afterDelay",
+	"editor.tabSize": 2,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.hover.delay": 500,
+	"editor.quickSuggestionsDelay": 1000
 }
