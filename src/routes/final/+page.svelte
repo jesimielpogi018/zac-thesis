@@ -4,7 +4,6 @@
 	import { Table, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell } from 'flowbite-svelte';
 
 	export let data: PageData;
-
 </script>
 
 <svelte:head>
@@ -18,21 +17,19 @@
 		<Table divClass="rounded-sm relative overflow-x-auto w-full">
 			<TableHead>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Equipment</TableHeadCell>
-				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">DDB</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Book Value</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Salvage Value</TableHeadCell>
+				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Depreciation Expenses</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Accumulated Depreciation</TableHeadCell>
-				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Output Depreciation</TableHeadCell>
 			</TableHead>
 			<TableBody tableBodyClass="divide-y">
 				{#each Object.entries(data.data) as [equipment, values]}
 					<TableBodyRow>
 						<TableBodyCell class="dark:bg-[#383838]">{equipment.toLocaleUpperCase()}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.DDB * 100) / 100).toFixed(2))}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.BOOK_VALUE * 100) / 100).toFixed(2))}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.SALVAGE_VALUE * 100) / 100).toFixed(2))}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.ACCUMULATED_DEPRECIATION * 100) / 100).toFixed(2))}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.OUTPUT_DEPRECIATION_RATE * 100) / 100).toFixed(2))}</TableBodyCell>
+						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.ACCUMULATED_DEPRECIATION * 100) / 100).toFixed(2))}</TableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>

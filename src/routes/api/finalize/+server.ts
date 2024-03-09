@@ -25,13 +25,12 @@ export const POST: RequestHandler = async ({ request }) => {
 		const bookValue = solve.calculateBookValue(i.rate, i.cost, i.years);
 		const outputDepreciationRate = solve.outputDepreciationRate(bookValue, salvage, i.expected);
 
-		// console.log('accumulatedDepreciation', accumulatedDepreciation);
-		// console.log('salvage', salvage);
-		// console.log('bookValue', bookValue);
-		// console.log('outputDepreciationRate', outputDepreciationRate);
+		console.log('accumulatedDepreciation', accumulatedDepreciation);
+		console.log('salvage', salvage);
+		console.log('bookValue', bookValue);
+		console.log('outputDepreciationRate', outputDepreciationRate);
 
 		res[key] = {
-			DDB: solve.calculateDDB(i),
 			SALVAGE_VALUE: salvage,
 			ACCUMULATED_DEPRECIATION: accumulatedDepreciation,
 			BOOK_VALUE: bookValue,
