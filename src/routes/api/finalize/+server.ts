@@ -20,10 +20,22 @@ export const POST: RequestHandler = async ({ request }) => {
 			years: value.yearsInOperation as number
 		};
 
+		for (let index = 1; index <= i.years; index++) {
+			const salvage = solve.calculateSalvageValue(i);
+			const bookValue = solve.calculateBookValue(i.rate, i.cost, index);
+			const outputDepreciationRate = solve.outputDepreciationRate(bookValue, salvage, i.expected);
+			const accumulatedDepreciation = solve.calculateAccumulatedDepreciation(bookValue, i.rate);
+
+			console.log(`Year ${index}: Accumulated Depreciation`, accumulatedDepreciation);
+			console.log(`Year ${index}: Salvage`, salvage);
+			console.log(`Year ${index}: Book Value`, bookValue);
+			console.log(`Year ${index}: Output Depreciation`, outputDepreciationRate);
+		}
+
 		const salvage = solve.calculateSalvageValue(i);
-		const accumulatedDepreciation = solve.calculateAccumulatedDepreciation(i.rate, i.cost, i.years);
 		const bookValue = solve.calculateBookValue(i.rate, i.cost, i.years);
 		const outputDepreciationRate = solve.outputDepreciationRate(bookValue, salvage, i.expected);
+		const accumulatedDepreciation = solve.calculateAccumulatedDepreciation(bookValue, i.rate);
 
 		console.log('accumulatedDepreciation', accumulatedDepreciation);
 		console.log('salvage', salvage);
