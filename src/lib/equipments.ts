@@ -1,1 +1,1 @@
-export const equipments = ['excavator', 'dump truck', 'roller', 'backhoe', 'bulldozer', 'grader'];
+export const equipments = ['excavator', 'dump truck', 'backhoe', 'bulldozer'];
