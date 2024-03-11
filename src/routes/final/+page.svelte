@@ -19,7 +19,6 @@
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Equipment</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Salvage Value</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Book Value (Start)</TableHeadCell>
-				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Depreciation Expenses</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Accumulated Depreciation</TableHeadCell>
 				<TableHeadCell class="dark:bg-[#212121] dark:text-neutral-100">Book Value (End)</TableHeadCell>
 			</TableHead>
@@ -29,12 +28,19 @@
 						<TableBodyCell class="dark:bg-[#383838]">{equipment.toLocaleUpperCase()}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.SALVAGE_VALUE * 100) / 100).toFixed(2))}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.BOOK_VALUE * 100) / 100).toFixed(2))}</TableBodyCell>
-						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.OUTPUT_DEPRECIATION_RATE * 100) / 100).toFixed(2))}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round((values.ACCUMULATED_DEPRECIATION * 100) / 100).toFixed(2))}</TableBodyCell>
 						<TableBodyCell class="dark:bg-[#383838]">{toCurrency(+Math.round(((values.BOOK_VALUE - values.ACCUMULATED_DEPRECIATION) * 100) / 100).toFixed(2))}</TableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
 		</Table>
+	</section>
+
+	<section>
+		{#each Object.entries(data.data) as [equipment, values]}
+			<div>
+				<p>{equipment.toLocaleUpperCase()}'s Units of output Depreciated Value is {toCurrency(+Math.round((values.OUTPUT_DEPRECIATION_RATE * 100) / 100).toFixed(2))}</p>
+			</div>
+		{/each}
 	</section>
 </div>

@@ -11,8 +11,8 @@ export function calculateSalvageValue(i: Inputs): number {
 	return i.cost * Math.pow(1 - i.rate / 100, i.years);
 }
 
-export function outputDepreciationRate(bookValue: number, salvageValue: number, expected: number): number {
-	return (bookValue - salvageValue) / expected;
+export function outputDepreciationRate(cost: number, salvageValue: number, expected: number): number {
+	return (cost - salvageValue) / expected;
 }
 
 export function calculateBookValue(rate: number, cost: number, years: number): number {

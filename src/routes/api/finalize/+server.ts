@@ -34,7 +34,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		const salvage = solve.calculateSalvageValue(i);
 		const bookValue = solve.calculateBookValue(i.rate, i.cost, i.years);
-		const outputDepreciationRate = solve.outputDepreciationRate(bookValue, salvage, i.expected);
+		const outputDepreciationRate = solve.outputDepreciationRate(i.cost, salvage, i.expected);
 		const accumulatedDepreciation = solve.calculateAccumulatedDepreciation(bookValue, i.rate);
 
 		console.log('accumulatedDepreciation', accumulatedDepreciation);

@@ -3,7 +3,6 @@ import { equipments } from '$lib/equipments';
 import type { ResponseData } from '$lib/interface/ResponseData';
 
 export const load: PageServerLoad = async ({ url }) => {
-	const ddb = 'DDB';
 	const bookValue = 'BOOK_VALUE';
 	const salvageValue = 'SALVAGE_VALUE';
 	const accumulatedDepreciation = 'ACCUMULATED_DEPRECIATION';
@@ -15,9 +14,6 @@ export const load: PageServerLoad = async ({ url }) => {
 		let solution: Partial<ResponseData> = {};
 
 		for (const [key, value] of url.searchParams.entries()) {
-			if (key.startsWith(equipment) && key.endsWith(ddb)) {
-				solution = { ...solution, DDB: +value };
-			}
 			if (key.startsWith(equipment) && key.endsWith(salvageValue)) {
 				solution = { ...solution, SALVAGE_VALUE: +value };
 			}
