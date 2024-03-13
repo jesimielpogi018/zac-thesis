@@ -39,8 +39,8 @@
 	<section>
 		{#each Object.entries(data.data) as [equipment, values]}
 			<div>
+				<p>{equipment.toLocaleUpperCase()}'s Units of output Depreciated Value (Mileage) is {+Math.round((values.OUTPUT_DEPRECIATION_RATE_IN_MILEAGE * 100) / 100).toFixed(2)}/unit produced.</p>
 				<p>{equipment.toLocaleUpperCase()}'s Units of output Depreciated Value (Expected Output) is {toCurrency(+Math.round((values.OUTPUT_DEPRECIATION_RATE_IN_EXPECTED * 100) / 100).toFixed(2))}</p>
-				<p>{equipment.toLocaleUpperCase()}'s Units of output Depreciated Value (Mileage) is {toCurrency(+Math.round((values.OUTPUT_DEPRECIATION_RATE_IN_MILEAGE * 100) / 100).toFixed(2))}</p>
 			</div>
 		{/each}
 	</section>
