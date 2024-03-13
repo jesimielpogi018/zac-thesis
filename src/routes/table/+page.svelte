@@ -39,7 +39,7 @@
 				return;
 			}
 
-			if (previewData[equipment].expected == null) {
+			if (previewData[equipment].expected == null && previewData[equipment].mileage == null) {
 				isDisabled = true;
 				return;
 			}

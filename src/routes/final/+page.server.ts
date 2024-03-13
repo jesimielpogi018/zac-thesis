@@ -6,7 +6,8 @@ export const load: PageServerLoad = async ({ url }) => {
 	const bookValue = 'BOOK_VALUE';
 	const salvageValue = 'SALVAGE_VALUE';
 	const accumulatedDepreciation = 'ACCUMULATED_DEPRECIATION';
-	const outputDepreciationRate = 'OUTPUT_DEPRECIATION_RATE';
+	const outputDepreciationRateInExpected = 'OUTPUT_DEPRECIATION_RATE_IN_EXPECTED';
+	const outputDepreciationRateInMileage = 'OUTPUT_DEPRECIATION_RATE_IN_MILEAGE';
 
 	const data: { [key: string]: ResponseData } = {};
 
@@ -23,8 +24,11 @@ export const load: PageServerLoad = async ({ url }) => {
 			if (key.startsWith(equipment) && key.endsWith(accumulatedDepreciation)) {
 				solution = { ...solution, ACCUMULATED_DEPRECIATION: +value };
 			}
-			if (key.startsWith(equipment) && key.endsWith(outputDepreciationRate)) {
-				solution = { ...solution, OUTPUT_DEPRECIATION_RATE: +value };
+			if (key.startsWith(equipment) && key.endsWith(outputDepreciationRateInExpected)) {
+				solution = { ...solution, OUTPUT_DEPRECIATION_RATE_IN_EXPECTED: +value };
+			}
+			if (key.startsWith(equipment) && key.endsWith(outputDepreciationRateInMileage)) {
+				solution = { ...solution, OUTPUT_DEPRECIATION_RATE_IN_MILEAGE: +value };
 			}
 		}
 
